@@ -4,19 +4,30 @@ export default [
   {
     path: '/news-manage',
     name: 'NewsManage',
+    meta: {
+      title: '新闻管理',
+      icon: 'test'
+    },
     component: Layout,
     redirect: '/news-manage/news-list',
     children: [
       {
         path: 'news-list',
         name: 'NewsList',
-        component: import (/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsList.vue')
+        meta: {
+          icon: 'pie-chart',
+          title: '新闻列表'
+        },
+        component: import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsList.vue')
       },
       {
         path: 'news-detail',
         name: 'NewsDetail',
+        meta: {
+          title: '新闻详情'
+        },
         hideInMenu: true,
-        component: import (/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsDetail.vue')
+        component: import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsDetail.vue')
       }
     ]
   }

@@ -1,69 +1,60 @@
 <template>
-  <a-menu theme="dark" v-model:selectedKeys="selectedKeys" mode="inline">
-    <a-menu-item key="1">
-      <router-link to="/home">
-        <pie-chart-outlined />
-        <span>总览</span>
-      </router-link>
-    </a-menu-item>
-    <a-menu-item key="2">
-      <router-link to="/news-manage/news-list">
-        <desktop-outlined />
-        <span>新闻列表</span>
-      </router-link>
-    </a-menu-item>
-    <a-menu-item key="3">
-      <router-link to="/news-manage/news-detail">
-        <desktop-outlined />
-        <span>新闻详情</span>
-      </router-link>
-    </a-menu-item>
-    <a-sub-menu key="sub1">
-      <template #title>
-        <span>
-          <user-outlined /><span>User</span>
-        </span>
-      </template>
-      <a-menu-item key="3">Tom</a-menu-item>
-      <a-menu-item key="4">Bill</a-menu-item>
-      <a-menu-item key="5">Alex</a-menu-item>
-    </a-sub-menu>
-    <a-sub-menu key="sub2">
-      <template #title>
-        <span>
-          <team-outlined /><span>Team</span>
-        </span>
-      </template>
-      <a-menu-item key="6">Team 1</a-menu-item>
-      <a-menu-item key="8">Team 2</a-menu-item>
-    </a-sub-menu>
-    <a-menu-item key="9">
-      <file-outlined />
-      <span>File</span>
-    </a-menu-item>
+  <a-menu theme="dark" :selectedKeys="selectedKeys" mode="inline">
+    <template v-for="item in menuData" :key="item.path">
+      <a-menu-item v-if="!item.children" :key="item.path">
+        <router-link :to="{ name: item.name }">
+          <a-icon v-if="item.meta.icon" :type="item.meta.icon"></a-icon>
+          <span>{{ item.meta.title }}</span>
+        </router-link>
+      </a-menu-item>
+      <sub-menu v-else :key="item.path" :menu-info="item"></sub-menu>
+    </template>
   </a-menu>
 </template>
 <script>
-import {
-  PieChartOutlined,
-  DesktopOutlined,
-  UserOutlined,
-  TeamOutlined,
-  FileOutlined,
-} from '@ant-design/icons-vue'
+import SubMenu from './SubMenu'
+
 export default {
   name: 'SideBar',
   data() {
+    const menuData = this.getMenuList(this.$router.options.routes)
     return {
       selectedKeys: ['1'],
+      openKeys: [],
+      list: [],
+      menuData,
     }
   },
+  mounted() {
+    console.log('menuData', this.menuData)
+  },
+  methods: {
+    getMenuList(routes) {
+      const menuData = []
+
+      routes.forEach((item) => {
+        if (item.name && !item.hideInMenu) {
+          const newItem = { ...item }
+          delete newItem.children
+
+          if (item.children && !item.hideChildrenInMenu) {
+            newItem.children = this.getMenuList(item.children)
+          }
+          menuData.push(newItem)
+        } else if (
+          !item.hideInMenu &&
+          !item.hideChildrenInMenu &&
+          item.children
+        ) {
+          menuData.push(...this.getMenuList(item.children))
+        }
+      })
+
+      return menuData
+    },
+  },
   components: {
-    PieChartOutlined,
-    DesktopOutlined,
-    UserOutlined,
-    TeamOutlined,
-    FileOutlined,
+    SubMenu,
   },
 }
 </script>

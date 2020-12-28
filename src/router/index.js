@@ -7,18 +7,29 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
+    meta: {
+      title: '登录页'
+    },
     hideInMenu: true,
-    component: () => import (/* webpackChunkName: "login" */ "../views/Login/Login.vue")
+    component: () => import(/* webpackChunkName: "login" */ "../views/Login/Login.vue")
   },
   {
     path: "/",
     name: "Layout",
+    meta: {
+      icon: 'home',
+      title: '总览'
+    },
     component: Layout,
     redict: '/home',
     children: [
       {
         path: '/home',
         name: 'Home',
+        meta: {
+          icon: 'home',
+          title: '首页'
+        },
         component: () => import(/* webpackChunkName: "home" */ "../views/Home/Home.vue"),
       }
     ]
@@ -27,6 +38,9 @@ const routes = [
   {
     path: '/404',
     name: '404',
+    meta: {
+      title: '404'
+    },
     hideInMenu: true,
     component: () => import(/* webpackChunkName: "404" */ "../views/other/404.vue")
   }
