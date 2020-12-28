@@ -1,7 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Layout from "../views/Layout/Layout.vue";
 
+import NewsManageRoute from './newsManage'
+
 const routes = [
+  {
+    path: '/login',
+    name: 'Login',
+    hideInMenu: true,
+    component: () => import (/* webpackChunkName: "login" */ "../views/Login/Login.vue")
+  },
   {
     path: "/",
     name: "Layout",
@@ -15,6 +23,13 @@ const routes = [
       }
     ]
   },
+  ...NewsManageRoute,
+  {
+    path: '/404',
+    name: '404',
+    hideInMenu: true,
+    component: () => import(/* webpackChunkName: "404" */ "../views/other/404.vue")
+  }
 ];
 
 const router = createRouter({
