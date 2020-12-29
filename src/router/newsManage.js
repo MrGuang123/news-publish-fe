@@ -6,7 +6,8 @@ export default [
     name: 'NewsManage',
     meta: {
       title: '新闻管理',
-      icon: 'iconxinwen'
+      icon: 'iconxinwen',
+      auth: ['admin']
     },
     component: Layout,
     redirect: '/news-manage/news-list',

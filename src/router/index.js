@@ -18,7 +18,8 @@ const routes = [
     name: "Layout",
     meta: {
       icon: 'iconzhanghuzonglan',
-      title: '总览'
+      title: '总览',
+      auth: ['user', 'admin']
     },
     component: Layout,
     redict: '/home',
@@ -28,7 +29,8 @@ const routes = [
         name: 'Home',
         meta: {
           icon: 'iconshouye',
-          title: '首页'
+          title: '首页',
+          auth: ['user', 'admin']
         },
         component: () => import(/* webpackChunkName: "home" */ "../views/Home/Home.vue"),
       }
