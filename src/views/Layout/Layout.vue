@@ -1,28 +1,18 @@
 <template>
   <a-layout class="layout-wrap">
     <a-layout-sider :trigger="null" v-model:collapsed="collapsed" collapsible>
-      <div class="logo" />
+      <div class="logo">
+
+      </div>
       <side-bar></side-bar>
     </a-layout-sider>
     <a-layout>
       <a-layout-header class="layout-header">
-        <menu-unfold-outlined
-          v-if="collapsed"
-          class="trigger"
-          @click="() => (collapsed = !collapsed)"
-        />
-        <menu-fold-outlined
-          v-else
-          class="trigger"
-          @click="() => (collapsed = !collapsed)"
-        />
+        <menu-unfold-outlined v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)" />
+        <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
         <Header></Header>
       </a-layout-header>
       <a-layout-content class="layout-content">
-        <a-breadcrumb style="margin: 16px 0">
-          <a-breadcrumb-item>User</a-breadcrumb-item>
-          <a-breadcrumb-item>Bill</a-breadcrumb-item>
-        </a-breadcrumb>
         <app-main></app-main>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
@@ -35,7 +25,9 @@
 import Header from './Header'
 import SideBar from './SideBar'
 import AppMain from './AppMain'
-import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
+
+import { mapActions, mapState } from 'vuex'
+
 export default {
   data() {
     return {
@@ -46,8 +38,37 @@ export default {
     Header,
     SideBar,
     AppMain,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
+  },
+  computed: {
+    test() {
+      return 'aaaa'
+    },
+    ...mapState('user', {
+      status: (state) => state.status,
+    }),
+    ...mapState('list', {
+      count: (state) => state.count,
+    }),
+  },
+  async mounted() {
+    console.log(this)
+    console.log(this.status)
+    console.log(this.count)
+
+    await this.login()
+    await this.getList()
+    this.$nextTick(() => {
+      console.log('wait', this.status)
+      console.log('wait', this.count)
+    })
+  },
+  methods: {
+    ...mapActions('user', {
+      login: 'LOGIN',
+    }),
+    ...mapActions('list', {
+      getList: 'GETLIST',
+    }),
   },
 }
 </script>

@@ -17,7 +17,7 @@ const routes = [
     path: "/",
     name: "Layout",
     meta: {
-      icon: 'home',
+      icon: 'iconzhanghuzonglan',
       title: '总览'
     },
     component: Layout,
@@ -27,7 +27,7 @@ const routes = [
         path: '/home',
         name: 'Home',
         meta: {
-          icon: 'home',
+          icon: 'iconshouye',
           title: '首页'
         },
         component: () => import(/* webpackChunkName: "home" */ "../views/Home/Home.vue"),

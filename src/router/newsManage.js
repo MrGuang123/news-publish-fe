@@ -6,7 +6,7 @@ export default [
     name: 'NewsManage',
     meta: {
       title: '新闻管理',
-      icon: 'test'
+      icon: 'iconxinwen'
     },
     component: Layout,
     redirect: '/news-manage/news-list',
@@ -15,7 +15,7 @@ export default [
         path: 'news-list',
         name: 'NewsList',
         meta: {
-          icon: 'pie-chart',
+          icon: 'iconliebiao',
           title: '新闻列表'
         },
         component: import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsList.vue')

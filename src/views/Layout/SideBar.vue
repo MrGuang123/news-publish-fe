@@ -1,9 +1,9 @@
 <template>
-  <a-menu theme="dark" :selectedKeys="selectedKeys" mode="inline">
+  <a-menu theme="dark" :defaultSelectedKeys="selectedKeys" :defaultOpenKeys="openKeys" mode="inline">
     <template v-for="item in menuData" :key="item.path">
       <a-menu-item v-if="!item.children" :key="item.path">
         <router-link :to="{ name: item.name }">
-          <a-icon v-if="item.meta.icon" :type="item.meta.icon"></a-icon>
+          <icon-font v-if="item.meta.icon" :type="item.meta.icon" :style="iconStyle"></icon-font>
           <span>{{ item.meta.title }}</span>
         </router-link>
       </a-menu-item>
@@ -17,16 +17,20 @@ import SubMenu from './SubMenu'
 export default {
   name: 'SideBar',
   data() {
-    const menuData = this.getMenuList(this.$router.options.routes)
+    // const menuData = this.getMenuList(this.$router.options.routes)
     return {
-      selectedKeys: ['1'],
+      selectedKeys: ['/home'],
       openKeys: [],
-      list: [],
-      menuData,
+      menuData: [],
+      iconStyle: {
+        color: '#fff',
+      },
     }
   },
   mounted() {
-    console.log('menuData', this.menuData)
+    this.menuData = this.getMenuList(this.$router.options.routes)
+    this.openKeys.push(this.menuData[0].path)
+    // console.log('menuData', this.menuData[0].path)
   },
   methods: {
     getMenuList(routes) {
