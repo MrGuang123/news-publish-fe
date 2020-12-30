@@ -22,7 +22,7 @@ const routes = [
       auth: ['user', 'admin']
     },
     component: Layout,
-    redict: '/home',
+    redirect: '/home',
     children: [
       {
         path: '/home',

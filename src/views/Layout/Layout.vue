@@ -51,16 +51,16 @@ export default {
     }),
   },
   async mounted() {
-    console.log(this)
-    console.log(this.status)
-    console.log(this.count)
-
-    await this.login()
-    await this.getList()
-    this.$nextTick(() => {
-      console.log('wait', this.status)
-      console.log('wait', this.count)
-    })
+    // 测试vuex
+    // console.log(this)
+    // console.log(this.status)
+    // console.log(this.count)
+    // await this.login()
+    // await this.getList()
+    // this.$nextTick(() => {
+    //   console.log('wait', this.status)
+    //   console.log('wait', this.count)
+    // })
   },
   methods: {
     ...mapActions('user', {

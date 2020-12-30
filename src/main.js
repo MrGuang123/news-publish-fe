@@ -16,6 +16,9 @@ const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_2298558_xud0lh0vztm.js',
 })
 
+console.log(process.env.VUE_APP_MOCK)
+process.env.VUE_APP_MOCK && require('../Mock')
+
 const app = createApp(App)
 
 app.component('icon-font', IconFont)
