@@ -1,9 +1,18 @@
 <template>
-  <a-menu theme="dark" :defaultSelectedKeys="selectedKeys" :defaultOpenKeys="openKeys" mode="inline">
+  <a-menu
+    theme="dark"
+    :defaultSelectedKeys="selectedKeys"
+    :defaultOpenKeys="openKeys"
+    mode="inline"
+  >
     <template v-for="item in menuData" :key="item.path">
       <a-menu-item v-if="!item.children" :key="item.path">
         <router-link :to="{ name: item.name }">
-          <icon-font v-if="item.meta.icon" :type="item.meta.icon" :style="iconStyle"></icon-font>
+          <icon-font
+            v-if="item.meta.icon"
+            :type="item.meta.icon"
+            :style="iconStyle"
+          ></icon-font>
           <span>{{ item.meta.title }}</span>
         </router-link>
       </a-menu-item>
@@ -23,14 +32,14 @@ export default {
       openKeys: [],
       menuData: [],
       iconStyle: {
-        color: '#fff',
-      },
+        color: '#fff'
+      }
     }
   },
   watch: {
-    '$route.path': (path) => {
+    '$route.path': function (path) {
       console.log(path)
-    },
+    }
   },
   mounted() {
     let metaInfo = this.$route.meta
@@ -45,7 +54,7 @@ export default {
     getMenuList(routes) {
       const menuData = []
 
-      routes.forEach((item) => {
+      routes.forEach(item => {
         if (item.name && !item.hideInMenu) {
           const newItem = { ...item }
           delete newItem.children
@@ -64,11 +73,11 @@ export default {
       })
 
       return menuData
-    },
+    }
   },
   components: {
-    SubMenu,
-  },
+    SubMenu
+  }
 }
 </script>
 <style lang="scss">
