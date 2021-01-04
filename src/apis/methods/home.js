@@ -9,14 +9,14 @@ export const getNewestList = () => {
   })
 }
 
-export const getNewsList = () => {
+export const getHotNewsList = () => {
   return axios({
     method: 'get',
-    url: urls.newsList
+    url: urls.hotNewsList
   })
 }
 
 export default {
   getNewestList,
-  getNewsList
+  getHotNewsList
 }

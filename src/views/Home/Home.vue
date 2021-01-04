@@ -21,7 +21,7 @@
       <a-list item-layout="horizontal" :data-source="newestNewsList">
         <template #renderItem="{ item }">
           <a-list-item>
-            <a-list-item-meta description="Ant Design, a design language for background applications, is refined by Ant UED Team">
+            <a-list-item-meta :description="item.content">
               <template #title>
                 <a href="https://www.antdv.com/">{{ item.title }}</a>
               </template>
@@ -38,7 +38,7 @@
       <a-list item-layout="horizontal" :data-source="hotNewsList">
         <template #renderItem="{ item }">
           <a-list-item>
-            <a-list-item-meta description="Ant Design, a design language for background applications, is refined by Ant UED Team">
+            <a-list-item-meta :description="item.content">
               <template #title>
                 <a href="https://www.antdv.com/">{{ item.title }}</a>
               </template>
@@ -54,65 +54,34 @@
 </template>
 <script>
 import api from '../../apis/methods'
-// import { getNewestList } from '../../apis/methods'
 
 export default {
   name: 'Home',
   data() {
     return {
-      newestNewsList: [
-        {
-          title: 'newestItem1',
-        },
-        {
-          title: 'newestItem2',
-        },
-        {
-          title: 'newestItem3',
-        },
-        {
-          title: 'newestItem4',
-        },
-        {
-          title: 'newestItem5',
-        },
-        {
-          title: 'newestItem6',
-        },
-      ],
-      hotNewsList: [
-        {
-          title: 'newestItem1',
-        },
-        {
-          title: 'newestItem2',
-        },
-        {
-          title: 'newestItem3',
-        },
-        {
-          title: 'newestItem4',
-        },
-        {
-          title: 'newestItem5',
-        },
-        {
-          title: 'newestItem6',
-        },
-      ],
+      newestNewsList: [],
+      hotNewsList: []
     }
   },
   mounted() {
     console.log(api)
     this.getNewestList()
+    this.getHotNewsList()
   },
   methods: {
     async getNewestList() {
       const { getNewestList } = api
-      let result = await getNewestList()
-      console.log('result', result)
+      let { data } = await getNewestList()
+      this.newestNewsList = data.data
+      // console.log('result', data)
     },
-  },
+    async getHotNewsList() {
+      const { getHotNewsList } = api
+      let { data } = await getHotNewsList()
+      this.hotNewsList = data.data
+      console.log('result', data)
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

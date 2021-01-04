@@ -1,9 +1,9 @@
 <template>
   <div class="main">
-    <a-breadcrumb class="breadcrumb">
+    <!-- <a-breadcrumb class="breadcrumb">
       <a-breadcrumb-item>User</a-breadcrumb-item>
       <a-breadcrumb-item>Bill</a-breadcrumb-item>
-    </a-breadcrumb>
+    </a-breadcrumb> -->
     <!-- vue2写法  即将不支持 -->
     <!-- <transition name="fade" enter-active-class="animated fadeIn" mode="out-in">
       <keep-alive>

@@ -1,10 +1,11 @@
 <template>
-  <div class="news-list">
+  <div class="my-news">
     <div class="news-header">
       <h3 class="list-title">全部新闻</h3>
       <a-input-search class="list-search" v-model:value="searchValue" placeholder="请输入新闻标题" enter-button="搜索" @search="onSearch" />
       <div class="control-group">
-        <a-button type="primary">下载新闻</a-button>
+        <a-button>下载新闻</a-button>
+        <a-button type="primary">新建新闻</a-button>
       </div>
     </div>
     <div class="search-content">
@@ -13,9 +14,11 @@
         <a-table-column key="author" title="作者" data-index="author" />
         <a-table-column key="publishTime" title="发布时间" data-index="publishTime"></a-table-column>
         <a-table-column key="readCount" title="阅读数" data-index="readCount" width="80px"></a-table-column>
-        <a-table-column key="action" title="Action" align="center" width="160px">
+        <a-table-column key="action" title="Action" align="center" width="200px">
           <template #default="{ record }">
             <span class="list-action" @click="findDetail(record)">查看</span>
+            <span class="list-action" @click="editNews(record)">编辑</span>
+            <span class="list-action" @click="deleteNews(record)">删除</span>
             <span class="list-action" @click="download(record)">下载</span>
           </template>
         </a-table-column>
@@ -27,7 +30,7 @@
 
 <script>
 export default {
-  name: 'NewsList',
+  name: 'MyNews',
   data() {
     return {
       searchValue: '',
@@ -57,6 +60,12 @@ export default {
     findDetail(record) {
       console.log(record)
     },
+    editNews(record) {
+      console.log(record)
+    },
+    deleteNews(record) {
+      console.log(record)
+    },
     download(record) {
       console.log(record)
     },
@@ -84,7 +93,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.news-list {
+.my-news {
   .news-header,
   .search-content {
     padding: 20px 16px;

@@ -19,7 +19,7 @@ export default {
   data() {
     // const menuData = this.getMenuList(this.$router.options.routes)
     return {
-      selectedKeys: ['/home'],
+      selectedKeys: [],
       openKeys: [],
       menuData: [],
       iconStyle: {
@@ -27,10 +27,19 @@ export default {
       },
     }
   },
+  watch: {
+    '$route.path': (path) => {
+      console.log(path)
+    },
+  },
   mounted() {
+    let metaInfo = this.$route.meta
     this.menuData = this.getMenuList(this.$router.options.routes)
-    this.openKeys.push(this.menuData[0].path)
-    // console.log('menuData', this.menuData[0].path)
+
+    this.selectedKeys.push(metaInfo.activeMenu)
+    this.openKeys.push(metaInfo.openMenu)
+    // this.openKeys.push(this.menuData[0].path)
+    console.log('metaInfo', metaInfo)
   },
   methods: {
     getMenuList(routes) {
