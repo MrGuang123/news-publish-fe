@@ -3,11 +3,12 @@
     <div class="news-header">
       <h3 class="list-title">全部新闻</h3>
       <a-input-search class="list-search" v-model:value="searchValue" placeholder="请输入新闻标题" enter-button="搜索" @search="onSearch" />
-      <div class="control-group">
-        <a-button type="primary">下载新闻</a-button>
-      </div>
     </div>
     <div class="search-content">
+      <div class="control-group">
+        <a-button type="primary" ghost shape="round" @click="download">下载新闻</a-button>
+        <a-button type="primary" shape="round" @click="download('all')">全部下载</a-button>
+      </div>
       <a-table :row-selection="rowSelection" :data-source="data" :pagination="false">
         <a-table-column key="title" title="新闻标题" data-index="title" />
         <a-table-column key="author" title="作者" data-index="author" />
@@ -16,7 +17,6 @@
         <a-table-column key="action" title="Action" align="center" width="160px">
           <template #default="{ record }">
             <span class="list-action" @click="findDetail(record)">查看</span>
-            <span class="list-action" @click="download(record)">下载</span>
           </template>
         </a-table-column>
       </a-table>
@@ -57,8 +57,12 @@ export default {
     findDetail(record) {
       console.log(record)
     },
-    download(record) {
-      console.log(record)
+    download(flag) {
+      if (flag === 'all') {
+        // 下载全部新闻
+      } else {
+        // 根据表格选项进行多项下载
+      }
     },
     onChange(pageIndex) {
       this.pageInfo.pageIndex = pageIndex
@@ -95,6 +99,7 @@ export default {
   .control-group {
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 16px;
     button + button {
       margin-left: 10px;
     }
