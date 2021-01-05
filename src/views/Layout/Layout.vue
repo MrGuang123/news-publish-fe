@@ -44,10 +44,10 @@ export default {
       return 'aaaa'
     },
     ...mapState('user', {
-      status: (state) => state.status,
+      status: state => state.status,
     }),
     ...mapState('list', {
-      count: (state) => state.count,
+      count: state => state.count,
     }),
   },
   async mounted() {
@@ -75,6 +75,7 @@ export default {
 <style lang="scss">
 .layout-wrap {
   min-height: 100vh !important;
+  min-width: 1200px !important;
   .logo {
     height: 32px;
     background: rgba(255, 255, 255, 0.2);

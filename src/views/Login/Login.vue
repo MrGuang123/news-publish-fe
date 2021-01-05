@@ -5,10 +5,18 @@
         <a-tab-pane key="1" tab="登录">
           <a-form ref="loginForm" layout="horizontal" :hideRequiredMark="true" :model="loginForm" :rules="loginRules" :label-col="labelCol" :wrapper-col="wrapperCol">
             <a-form-item label="用户名" name="userName">
-              <a-input v-model:value="loginForm.userName" />
+              <a-input v-model:value="loginForm.userName">
+                <template #addonBefore>
+                  <icon-font type="iconiconname"></icon-font>
+                </template>
+              </a-input>
             </a-form-item>
             <a-form-item label="密码" name="password">
-              <a-input v-model:value="loginForm.password" />
+              <a-input v-model:value="loginForm.password">
+                <template #addonBefore>
+                  <icon-font type="iconsuo"></icon-font>
+                </template>
+              </a-input>
             </a-form-item>
             <a-form-item :wrapper-col="{ span: 6, offset: 8 }">
               <a-button class="submit-btn" type="primary" @click="login">登录</a-button>
@@ -103,6 +111,9 @@ export default {
     }
     ::v-deep(.ant-input) {
       background: rgba(255, 255, 255, 0.6);
+    }
+    ::v-deep(.ant-input-group-addon) {
+      background: transparent;
     }
 
     .submit-btn {

@@ -1,18 +1,9 @@
 <template>
-  <a-menu
-    theme="dark"
-    :defaultSelectedKeys="selectedKeys"
-    :defaultOpenKeys="openKeys"
-    mode="inline"
-  >
+  <a-menu theme="dark" :defaultSelectedKeys="selectedKeys" :defaultOpenKeys="openKeys" mode="inline">
     <template v-for="item in menuData" :key="item.path">
       <a-menu-item v-if="!item.children" :key="item.path">
         <router-link :to="{ name: item.name }">
-          <icon-font
-            v-if="item.meta.icon"
-            :type="item.meta.icon"
-            :style="iconStyle"
-          ></icon-font>
+          <icon-font v-if="item.meta.icon" :type="item.meta.icon" :style="iconStyle"></icon-font>
           <span>{{ item.meta.title }}</span>
         </router-link>
       </a-menu-item>
@@ -37,9 +28,9 @@ export default {
     }
   },
   watch: {
-    '$route.path': function (path) {
-      console.log(path)
-    }
+    // '$route.path': function (path) {
+    //   console.log(path)
+    // }
   },
   mounted() {
     let metaInfo = this.$route.meta
@@ -48,7 +39,7 @@ export default {
     this.selectedKeys.push(metaInfo.activeMenu)
     this.openKeys.push(metaInfo.openMenu)
     // this.openKeys.push(this.menuData[0].path)
-    console.log('metaInfo', metaInfo)
+    // console.log('metaInfo', metaInfo)
   },
   methods: {
     getMenuList(routes) {

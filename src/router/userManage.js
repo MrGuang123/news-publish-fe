@@ -6,7 +6,7 @@ export default [
     name: 'UserManage',
     meta: {
       title: '用户管理',
-      icon: 'iconxinwen',
+      icon: 'iconyonghuguanli_huaban',
       auth: ['admin']
     },
     component: Layout,

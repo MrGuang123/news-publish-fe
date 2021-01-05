@@ -6,7 +6,7 @@ export default [
     name: 'NewsAnalysis',
     meta: {
       title: '新闻统计',
-      icon: 'iconxinwen',
+      icon: 'icontongji',
       auth: ['admin']
     },
     component: Layout,
@@ -16,7 +16,7 @@ export default [
         path: 'analysis-index',
         name: 'NewsAnalysis',
         meta: {
-          icon: 'iconliebiao',
+          icon: 'icontubiaobingzhuangtu',
           title: '统计图表',
           activeMenu: 'analysis-index',
           openMenu: '/news-analysis'

@@ -6,7 +6,7 @@ export default [
     name: 'LabelManage',
     meta: {
       title: '标签管理',
-      icon: 'iconxinwen',
+      icon: 'iconbiaoqian',
       auth: ['admin']
     },
     component: Layout,

@@ -14,8 +14,8 @@
         <a-table-column key="title" title="新闻标题" data-index="title" />
         <a-table-column key="author" title="作者" data-index="author" />
         <a-table-column key="publishTime" title="发布时间" data-index="publishTime"></a-table-column>
-        <a-table-column key="readCount" title="阅读数" data-index="readCount" width="80px"></a-table-column>
-        <a-table-column key="action" title="Action" align="center" width="200px">
+        <a-table-column key="readCount" title="阅读数" data-index="readCount" width="100px"></a-table-column>
+        <a-table-column key="action" title="操作" align="center" width="200px">
           <template #default="{ record }">
             <span class="list-action" @click="findDetail(record)">查看</span>
             <span class="list-action" @click="editNews(record)">编辑</span>
