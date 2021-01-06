@@ -1,4 +1,4 @@
-# fe-v2
+# news-publish-fe
 
 ## Project setup
 ```
