@@ -3,7 +3,7 @@
 </template>
 
 <script>
-// import { throttle } from '../../utils/throttle'
+import { throttle } from '../../utils/throttle'
 const echarts = require('echarts/lib/echarts')
 require('echarts-wordcloud')
 require('echarts/theme/macarons')
@@ -129,9 +129,9 @@ export default {
       },
     ]
     this.initChart()
-    // window.addEventListener('resize', () => {
-    //   throttle(this.wordCloudChart.resize(), 200)
-    // })
+    window.addEventListener('resize', () => {
+      throttle(this.wordCloudChart.resize(), 200)
+    })
   },
   methods: {
     initChart() {

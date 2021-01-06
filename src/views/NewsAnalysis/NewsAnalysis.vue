@@ -3,7 +3,7 @@
     <h3 class="list-title">图表分析</h3>
     <a-row class="analysis-row">
       <a-col :span="24">
-        <!-- <WordCloudChart></WordCloudChart> -->
+        <WordCloudChart></WordCloudChart>
       </a-col>
     </a-row>
     <a-row class="analysis-row" :gutter="[0, 16]">
@@ -15,13 +15,13 @@
   </div>
 </template>
 <script>
-// import WordCloudChart from './WordCloud'
+import WordCloudChart from './WordCloud'
 import LineChart from './line'
 
 export default {
   name: 'NewsAnalysis',
   components: {
-    // WordCloudChart,
+    WordCloudChart,
     LineChart,
   },
   mounted() {

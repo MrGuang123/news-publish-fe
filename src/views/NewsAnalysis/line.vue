@@ -5,11 +5,11 @@
 <script>
 // require('echarts/lib/visual/symbol')
 const echarts = require('echarts/lib/echarts')
-// require('echarts/lib/chart/bar')
+// require('echarts/lib/chart/line')
 // require('echarts/lib/component/legend')
 // require('echarts/lib/component/tooltip')
 // require('echarts/lib/component/title')
-// import { throttle } from '../../utils/throttle'
+import { debounce } from '../../utils/debounce'
 export default {
   data() {
     return {
@@ -199,18 +199,19 @@ export default {
         series: [
           {
             name: '销量',
-            type: 'bar',
+            type: 'line',
             data: [5, 20, 36, 10, 10, 20],
           },
         ],
       }
       this.lineChart.setOption(options)
-      // window.addEventListener('resize', () => {
-      //   this.lineChart.resize()
-      // })
-      // setInterval(() => {
-      //   this.lineChart.resize()
-      // }, 500)
+      window.addEventListener(
+        'resize',
+        debounce(() => {
+          options.series[0].data[0] = Math.floor(Math.random() * 100)
+          this.lineChart.setOption(options)
+        }, 200)
+      )
     },
   },
 }

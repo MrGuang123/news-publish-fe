@@ -1,6 +1,6 @@
-export function debounce(fn, delay) {
+export const debounce = (fn, delay) => {
   var timer = null
-  return function() {
+  return () => {
     if(timer) clearTimeout(timer)
 
     timer = setTimeout(function() {
