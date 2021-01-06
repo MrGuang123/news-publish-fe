@@ -5,17 +5,17 @@
       <a-breadcrumb-item>Bill</a-breadcrumb-item>
     </a-breadcrumb> -->
     <!-- vue2写法  即将不支持 -->
-    <!-- <transition name="fade" enter-active-class="animated fadeIn" mode="out-in">
+    <transition name="fade" enter-active-class="animated fadeIn" mode="out-in">
       <keep-alive>
-      <router-view :key="key"></router-view>
+        <router-view />
       </keep-alive>
-    </transition> -->
+    </transition>
     <!-- vue3写法 -->
-    <router-view v-slot="{ Component }">
+    <!-- <router-view v-slot="{ Component }">
       <transition name="fade" enter-active-class="animated fadeIn" mode="out-in">
         <component :is="Component"></component>
       </transition>
-    </router-view>
+    </router-view> -->
   </div>
 </template>
 <script>

@@ -1,13 +1,64 @@
 <template>
-  <div class="header">Header</div>
+  <div class="header">
+    <div class="set-theme">
+      <a-dropdown>
+        <a-menu
+          slot="overlay"
+          @click="handleMenuClick"
+          :selected-keys="selectedKey"
+        >
+          <a-menu-item v-for="item in themeData" :key="item.key">
+            <a-icon type="user" />
+            <span>{{ item.name }}</span>
+          </a-menu-item>
+        </a-menu>
+        <a-button class="btn-trigger"
+          >设置主题 <a-icon type="down" />
+        </a-button>
+      </a-dropdown>
+    </div>
+    <div class="user">用户头像</div>
+  </div>
 </template>
 <script>
 export default {
   name: 'Header',
+  data() {
+    return {
+      themeData: [
+        {
+          name: '黑暗',
+          key: 'dark',
+          icon: '',
+        },
+        {
+          name: '明亮',
+          key: 'light',
+          icon: '',
+        },
+      ],
+      selectedKey: ['dark'],
+    }
+  },
+  methods: {
+    handleMenuClick({ key }) {
+      console.log(key)
+      this.selectedKey[0] = key
+    },
+  },
 }
 </script>
 <style lang="scss">
 .header {
-  float: right;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 50px;
+  .set-theme {
+    margin-right: 20px;
+  }
+  .btn-trigger {
+    margin-left: 6px;
+  }
 }
 </style>

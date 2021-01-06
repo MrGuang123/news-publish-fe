@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 import Layout from '../views/Layout/Layout.vue';
 
@@ -27,12 +28,12 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Layout',
-    meta: {
-      icon: 'iconzhanghuzonglan',
-      title: '总览',
-      auth: ['user', 'admin']
-    },
+    // name: 'Layout',
+    // meta: {
+    //   icon: 'iconzhanghuzonglan',
+    //   title: '总览',
+    //   auth: ['user', 'admin']
+    // },
     component: Layout,
     redirect: '/home',
     children: [

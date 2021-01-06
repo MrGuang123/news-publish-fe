@@ -13,7 +13,7 @@ export default [
     redirect: '/news-manage/news-list',
     children: [
       {
-        path: 'news-list',
+        path: '/news-manage/news-list',
         name: 'NewsList',
         meta: {
           icon: 'iconliebiao',
@@ -24,7 +24,7 @@ export default [
         component: import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsList.vue')
       },
       {
-        path: 'my-news',
+        path: '/news-manage/my-news',
         name: 'MyNews',
         meta: {
           icon: 'iconziyuan314',
@@ -35,7 +35,7 @@ export default [
         component: import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/MyNews.vue')
       },
       {
-        path: 'news-detail',
+        path: '/news-manage/news-detail',
         name: 'NewsDetail',
         meta: {
           title: '新闻详情',

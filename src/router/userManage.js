@@ -13,7 +13,7 @@ export default [
     redirect: '/user-manage/user-index',
     children: [
       {
-        path: 'user-index',
+        path: '/user-manage/user-index',
         name: 'UserIndex',
         meta: {
           icon: 'iconliebiao',

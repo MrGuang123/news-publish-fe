@@ -13,7 +13,7 @@ export default [
     redirect: '/news-analysis/analysis-index',
     children: [
       {
-        path: 'analysis-index',
+        path: '/news-analysis/analysis-index',
         name: 'NewsAnalysis',
         meta: {
           icon: 'icontubiaobingzhuangtu',
@@ -21,7 +21,7 @@ export default [
           activeMenu: 'analysis-index',
           openMenu: '/news-analysis'
         },
-        component: import(/* webpackChunkName: 'newsAnalysis' */ '../views/NewsAnalysis/NewsAnalysis.vue')
+        component: () => import(/* webpackChunkName: 'newsAnalysis' */ '../views/NewsAnalysis/NewsAnalysis.vue')
       }
     ]
   }

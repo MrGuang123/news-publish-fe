@@ -13,7 +13,7 @@ export default [
     redirect: '/label-manage/label-index',
     children: [
       {
-        path: 'label-index',
+        path: '/label-manage/label-index',
         name: 'LabelIndex',
         meta: {
           icon: 'iconliebiao',

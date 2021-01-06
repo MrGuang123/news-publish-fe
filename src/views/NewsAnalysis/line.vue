@@ -209,7 +209,7 @@ export default {
         'resize',
         debounce(() => {
           options.series[0].data[0] = Math.floor(Math.random() * 100)
-          this.lineChart.setOption(options)
+          this.lineChart.resize()
         }, 200)
       )
     },

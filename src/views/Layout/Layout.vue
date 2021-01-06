@@ -1,17 +1,18 @@
 <template>
   <a-layout class="layout-wrap">
-    <side-bar></side-bar>
+    <side-bar :collapsed="collapsed"></side-bar>
     <a-layout>
       <a-layout-header class="layout-header">
-        <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="() => (collapsed = !collapsed)" />
+        <a-icon
+          class="trigger"
+          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+          @click="() => (collapsed = !collapsed)"
+        />
         <Header></Header>
       </a-layout-header>
       <a-layout-content class="layout-content">
         <app-main></app-main>
       </a-layout-content>
-      <a-layout-footer style="text-align: center">
-        <!-- Ant Design ©2018 Created by Ant UED -->
-      </a-layout-footer>
     </a-layout>
   </a-layout>
 </template>
@@ -38,10 +39,10 @@ export default {
       return 'aaaa'
     },
     ...mapState('user', {
-      status: (state) => state.status,
+      status: state => state.status,
     }),
     ...mapState('list', {
-      count: (state) => state.count,
+      count: state => state.count,
     }),
   },
   async mounted() {
@@ -89,6 +90,8 @@ export default {
   .layout-header {
     background: #fff;
     padding: 0;
+    display: flex;
+    justify-content: space-between;
   }
   .layout-content {
     margin: 0 16px;

@@ -32,3 +32,5 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### 修改antd样式  less用/deep/ .xxx   scss用::v-deep .xxx

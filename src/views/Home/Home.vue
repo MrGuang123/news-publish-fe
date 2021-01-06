@@ -1,19 +1,17 @@
 <template>
   <div class="container">
     <div class="home-carousel-wrap">
-      <a-carousel class="carousel" effect="fade" autoplay>
-        <div class="carousel-item">
-          <span>1</span>
-        </div>
-        <div class="carousel-item">
-          <span>2</span>
-        </div>
-        <div class="carousel-item">
-          <span>3</span>
-        </div>
-        <div class="carousel-item">
-          <span>4</span>
-        </div>
+      <!-- <a-carousel class="carousel" effect="fade" autoplay>
+        <div class="carousel-item"><h3>1</h3></div>
+        <div class="carousel-item"><h3>2</h3></div>
+        <div class="carousel-item"><h3>3</h3></div>
+        <div class="carousel-item"><h3>4</h3></div>
+      </a-carousel> -->
+      <a-carousel effect="fade">
+        <div><h3>1</h3></div>
+        <div><h3>2</h3></div>
+        <div><h3>3</h3></div>
+        <div><h3>4</h3></div>
       </a-carousel>
     </div>
     <div class="home-list">
@@ -25,7 +23,9 @@
               <a href="https://www.antdv.com/">{{ item.title }}</a>
             </template>
             <template #avatar>
-              <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+              <a-avatar
+                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              />
             </template>
           </a-list-item-meta>
         </a-list-item>
@@ -40,7 +40,9 @@
               <a href="https://www.antdv.com/">{{ item.title }}</a>
             </template>
             <template #avatar>
-              <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+              <a-avatar
+                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              />
             </template>
           </a-list-item-meta>
         </a-list-item>
@@ -80,22 +82,39 @@ export default {
   },
 }
 </script>
-<style lang="scss" scoped>
-// .ant-carousel >>> .slick-slide {
-//   height: 300px;
-//   color: #fff;
+<style lang="scss">
+// .slick-slide {
+//   text-align: center;
+//   height: 160px;
+//   line-height: 160px;
+//   background: #364d79;
 //   overflow: hidden;
 // }
-.ant-carousel >>> .slick-slide {
+</style>
+<style lang="scss" scoped>
+.ant-carousel {
+  ::v-deep .slick-slide {
+    text-align: center;
+    height: 300px;
+    line-height: 300px;
+    background: #364d79;
+    overflow: hidden;
+  }
+}
+.slick-slide {
   text-align: center;
   height: 160px;
   line-height: 160px;
   background: #364d79;
   overflow: hidden;
 }
+
+.ant-carousel >>> .slick-slide h3 {
+  color: #fff;
+}
 .container {
   .home-carousel-wrap {
-    background: #1890ff;
+    // background: #1890ff;
     margin-bottom: 20px;
   }
   .home-list {
