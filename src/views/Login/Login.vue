@@ -5,14 +5,14 @@
         <a-tab-pane key="1" tab="登录">
           <a-form ref="loginForm" layout="horizontal" :hideRequiredMark="true" :model="loginForm" :rules="loginRules" :label-col="labelCol" :wrapper-col="wrapperCol">
             <a-form-item label="用户名" name="userName">
-              <a-input v-model:value="loginForm.userName">
+              <a-input v-model="loginForm.userName">
                 <template #addonBefore>
                   <icon-font type="iconiconname"></icon-font>
                 </template>
               </a-input>
             </a-form-item>
             <a-form-item label="密码" name="password">
-              <a-input v-model:value="loginForm.password">
+              <a-input v-model="loginForm.password">
                 <template #addonBefore>
                   <icon-font type="iconsuo"></icon-font>
                 </template>
@@ -26,22 +26,22 @@
         <a-tab-pane key="2" tab="注册">
           <a-form ref="registForm" layout="horizontal" :model="registForm" :rules="registerRules" :label-col="labelCol" :wrapper-col="wrapperCol">
             <a-form-item label="用户名" name="userName">
-              <a-input v-model:value="registForm.userName" />
+              <a-input v-model="registForm.userName" />
             </a-form-item>
             <a-form-item label="昵称" name="nickName">
-              <a-input v-model:value="registForm.nickName" />
+              <a-input v-model="registForm.nickName" />
             </a-form-item>
             <a-form-item label="密码" type="password" name="password">
-              <a-input v-model:value="registForm.password" />
+              <a-input v-model="registForm.password" />
             </a-form-item>
             <a-form-item label="重复密码" type="password" name="repeatPassword">
-              <a-input v-model:value="registForm.repeatPassword" />
+              <a-input v-model="registForm.repeatPassword" />
             </a-form-item>
             <a-form-item label="电话号码" name="telephone">
-              <a-input v-model:value="registForm.telephone" />
+              <a-input v-model="registForm.telephone" />
             </a-form-item>
             <a-form-item label="性别" name="sex">
-              <a-radio-group v-model:value="registForm.sex">
+              <a-radio-group v-model="registForm.sex">
                 <a-radio value="0">男</a-radio>
                 <a-radio value="1">女</a-radio>
               </a-radio-group>
@@ -67,20 +67,20 @@ export default {
       other: '',
       loginForm: {
         userName: '',
-        password: ''
+        password: '',
       },
       registForm: {
         userName: '',
-        password: ''
+        password: '',
       },
       loginRules,
-      registRules
+      registRules,
     }
   },
   methods: {
     login() {},
-    createUser() {}
-  }
+    createUser() {},
+  },
 }
 </script>
 

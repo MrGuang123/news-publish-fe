@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import Vue from "vue";
+import VueRouter from "vue-router";
 import NProgress from 'nprogress'
 
 import Layout from '../views/Layout/Layout.vue';
@@ -11,6 +12,8 @@ import NewsAnalysis from './newsAnalysis'
 // 进度条简单配置
 NProgress.inc(0.2)
 NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
+
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -63,8 +66,9 @@ const routes = [
   }
 ];
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+const router = new VueRouter({
+  mode: "history",
+  base: process.env.BASE_URL,
   routes
 });
 
@@ -79,4 +83,4 @@ router.afterEach(() => {
   NProgress.done()
 })
 
-export default router
+export default router;

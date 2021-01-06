@@ -1,15 +1,10 @@
 <template>
-  <a-menu theme="dark" :defaultSelectedKeys="selectedKeys" :defaultOpenKeys="openKeys" mode="inline">
-    <template v-for="item in menuData" :key="item.path">
-      <a-menu-item v-if="!item.children" :key="item.path">
-        <router-link :to="{ name: item.name }">
-          <icon-font v-if="item.meta.icon" :type="item.meta.icon" :style="iconStyle"></icon-font>
-          <span>{{ item.meta.title }}</span>
-        </router-link>
-      </a-menu-item>
-      <sub-menu v-else :key="item.path" :menu-info="item"></sub-menu>
-    </template>
-  </a-menu>
+  <a-layout-sider :trigger="null" v-model="collapsed" collapsible>
+    <div class="logo">
+
+    </div>
+    <sub-menu :theme="theme" :collapsed="collapsed" :key="item.path" :menu-data="menuData"></sub-menu>
+  </a-layout-sider>
 </template>
 <script>
 import SubMenu from './SubMenu'
@@ -22,9 +17,10 @@ export default {
       selectedKeys: [],
       openKeys: [],
       menuData: [],
+      theme: 'dark',
       iconStyle: {
-        color: '#fff'
-      }
+        color: '#fff',
+      },
     }
   },
   watch: {
@@ -45,7 +41,7 @@ export default {
     getMenuList(routes) {
       const menuData = []
 
-      routes.forEach(item => {
+      routes.forEach((item) => {
         if (item.name && !item.hideInMenu) {
           const newItem = { ...item }
           delete newItem.children
@@ -64,11 +60,11 @@ export default {
       })
 
       return menuData
-    }
+    },
   },
   components: {
-    SubMenu
-  }
+    SubMenu,
+  },
 }
 </script>
 <style lang="scss">

@@ -1,15 +1,10 @@
 <template>
-  <div class="app-container">
+  <div id="app">
     <router-view />
   </div>
 </template>
-<script>
-export default {
-  name: "app",
-};
-</script>
-<style>
-/* @import "normalize.css/normalize.css"; */
-@import "./assets/style/index.css";
-@import "./assets/style/custom.css";
+
+<style lang="scss">
+@import './assets/style/index.css';
+@import './assets/style/custom.css';
 </style>

@@ -2,7 +2,7 @@
   <div class="user-manage">
     <div class="user-header">
       <h3 class="list-title">全部新闻</h3>
-      <a-input-search class="list-search" v-model:value="searchValue" placeholder="请输入用户名称" enter-button="搜索" @search="onSearch" />
+      <a-input-search class="list-search" v-model="searchValue" placeholder="请输入用户名称" enter-button="搜索" @search="onSearch" />
       <a-button type="primary" @click="createUser" style="float:right;">新建用户</a-button>
     </div>
     <div class="search-content">
@@ -38,14 +38,14 @@ export default {
           author: 'tom',
           publishTime: '2021-1-1',
           readCount: 20,
-          key: 1
-        }
+          key: 1,
+        },
       ],
       pageInfo: {
         pageIndex: 1,
         pageSize: 10,
-        total: 500
-      }
+        total: 500,
+      },
     }
   },
   computed: {},
@@ -67,8 +67,8 @@ export default {
     onChange(pageIndex) {
       this.pageInfo.pageIndex = pageIndex
       console.log(pageIndex)
-    }
-  }
+    },
+  },
 }
 </script>
 

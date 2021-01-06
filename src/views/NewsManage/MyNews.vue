@@ -2,7 +2,7 @@
   <div class="my-news">
     <div class="news-header">
       <h3 class="list-title">全部新闻</h3>
-      <a-input-search class="list-search" v-model:value="searchValue" placeholder="请输入新闻标题" enter-button="搜索" @search="onSearch" />
+      <a-input-search class="list-search" v-model="searchValue" placeholder="请输入新闻标题" enter-button="搜索" @search="onSearch" />
       <a-button type="primary" @click="createNews" style="float:right;">新建新闻</a-button>
     </div>
     <div class="search-content">
@@ -41,14 +41,14 @@ export default {
           author: 'tom',
           publishTime: '2021-1-1',
           readCount: 20,
-          key: 1
-        }
+          key: 1,
+        },
       ],
       pageInfo: {
         pageIndex: 1,
         pageSize: 10,
-        total: 500
-      }
+        total: 500,
+      },
     }
   },
   computed: {},
@@ -87,13 +87,13 @@ export default {
             selectedRows
           )
         },
-        getCheckboxProps: record => ({
+        getCheckboxProps: (record) => ({
           disabled: record.name === 'Disabled User', // Column configuration not to be checked
-          name: record.name
-        })
+          name: record.name,
+        }),
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
