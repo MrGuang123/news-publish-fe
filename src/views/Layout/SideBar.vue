@@ -4,7 +4,7 @@
     <a-menu :selected-keys="selectedKeys" :open-keys.sync="openKeys" mode="inline" :theme="theme" :inline-collapsed="collapsed">
       <template v-for="item in menuData">
         <a-menu-item v-if="!item.children" :key="item.path" @click="() => $router.push({path: item.path, query: $router.query})">
-          <a-icon type="pie-chart" />
+          <icon-font style="color: #fff;" v-if="item.meta.icon" :type="item.meta.icon"></icon-font>
           <span>{{ item.meta.title }}</span>
         </a-menu-item>
         <sub-menu v-else :key="item.path" :menu-info="item" />

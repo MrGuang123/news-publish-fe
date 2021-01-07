@@ -1,11 +1,12 @@
 <template functional>
   <a-sub-menu :key="props.menuInfo.path">
     <span slot="title">
-      <a-icon type="mail" /><span>{{ props.menuInfo.meta.title }}</span>
+      <icon-font style="color: #fff;" v-if="props.menuInfo.meta.icon" :type="props.menuInfo.meta.icon"></icon-font>
+      <span>{{ props.menuInfo.meta.title }}</span>
     </span>
     <template v-for="item in props.menuInfo.children">
       <a-menu-item v-if="!item.children" :key="item.path" @click="() => parent.$router.push({path: item.path, query: parent.$router.query})">
-        <a-icon type="pie-chart" />
+        <icon-font style="color: #fff;" v-if="item.meta.icon" :type="item.meta.icon"></icon-font>
         <span>{{ item.meta.title }}</span>
       </a-menu-item>
       <sub-menu v-else :key="item.path" :menu-info="item" />

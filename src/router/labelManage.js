@@ -18,8 +18,6 @@ export default [
         meta: {
           icon: 'iconliebiao',
           title: '标签列表',
-          activeMenu: 'label-index',
-          openMenu: '/label-manage'
         },
         component: () => import(/* webpackChunkName: 'LabelManage' */ '../views/LabelManage/LabelManage.vue')
       }

@@ -5,6 +5,7 @@
 <script>
 import { throttle } from '../../utils/throttle'
 const echarts = require('echarts/lib/echarts')
+require('echarts/lib/component/title')
 require('echarts-wordcloud')
 require('echarts/theme/macarons')
 export default {
@@ -16,6 +17,15 @@ export default {
         backgroundColor: '#fff',
         tooltip: {
           show: true,
+        },
+        title: {
+          text: '各标签新闻数量',
+          textStyle: {
+            fontSize: 16,
+            fontWeight: 400,
+          },
+          left: '5%',
+          top: '5%',
         },
         series: [
           {
@@ -129,14 +139,17 @@ export default {
       },
     ]
     this.initChart()
-    window.addEventListener('resize', () => {
-      throttle(this.wordCloudChart.resize(), 200)
-    })
   },
   methods: {
     initChart() {
       this.options.series[0].data = this.wordCloudData
       this.wordCloudChart.setOption(this.options)
+      setTimeout(() => {
+        this.wordCloudChart.resize()
+      }, 100)
+      window.addEventListener('resize', () => {
+        throttle(this.wordCloudChart.resize(), 200)
+      })
     },
   },
 }
@@ -145,6 +158,8 @@ export default {
 <style>
 .word-cloud {
   width: 100%;
-  height: 300px;
+  height: 360px;
+  border-radius: 6px;
+  overflow: hidden;
 }
 </style>

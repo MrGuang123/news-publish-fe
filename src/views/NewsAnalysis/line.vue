@@ -3,13 +3,12 @@
 </template>
 
 <script>
-// require('echarts/lib/visual/symbol')
 const echarts = require('echarts/lib/echarts')
 // require('echarts/lib/chart/line')
-// require('echarts/lib/component/legend')
-// require('echarts/lib/component/tooltip')
-// require('echarts/lib/component/title')
-import { debounce } from '../../utils/debounce'
+require('echarts/lib/component/legend')
+require('echarts/lib/component/tooltip')
+require('echarts/lib/component/title')
+import { throttle } from '../../utils/throttle'
 export default {
   data() {
     return {
@@ -30,21 +29,11 @@ export default {
       title: {
         text: '近一周新闻发布总量',
         textStyle: {
-          fontSize: 12,
+          fontSize: 16,
           fontWeight: 400,
         },
-        left: 'center',
+        left: '5%',
         top: '5%',
-      },
-      legend: {
-        icon: 'circle',
-        top: '5%',
-        right: '5%',
-        itemWidth: 6,
-        itemGap: 20,
-        textStyle: {
-          color: '#556677',
-        },
       },
       tooltip: {
         trigger: 'axis',
@@ -187,28 +176,14 @@ export default {
     initChart() {
       this.options.xAxis[0].data = this.dateList
       this.options.series[0].data = this.lineData
-      let options = {
-        title: {
-          text: 'ECharts 入门示例',
-        },
-        tooltip: {},
-        xAxis: {
-          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
-        },
-        yAxis: {},
-        series: [
-          {
-            name: '销量',
-            type: 'line',
-            data: [5, 20, 36, 10, 10, 20],
-          },
-        ],
-      }
-      this.lineChart.setOption(options)
+
+      this.lineChart.setOption(this.options)
+      setTimeout(() => {
+        this.lineChart.resize()
+      }, 100)
       window.addEventListener(
         'resize',
-        debounce(() => {
-          options.series[0].data[0] = Math.floor(Math.random() * 100)
+        throttle(() => {
           this.lineChart.resize()
         }, 200)
       )
@@ -217,9 +192,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .line-chart {
   width: 100%;
-  height: 300px;
+  height: 360px;
 }
 </style>

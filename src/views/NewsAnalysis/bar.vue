@@ -1,147 +1,139 @@
 <template>
-  <div class="word-cloud"></div>
+  <div class="bar-chart"></div>
 </template>
 
 <script>
+const echarts = require('echarts/lib/echarts')
+require('echarts/lib/chart/bar')
+require('echarts/lib/component/legend')
+require('echarts/lib/component/tooltip')
+require('echarts/lib/component/title')
 import { throttle } from '../../utils/throttle'
 export default {
   data() {
     return {
-      wordCloudChart: null,
-      wordCloudData: [],
-      options: {
-        backgroundColor: '#fff',
-        tooltip: {
-          show: true,
-        },
-        series: [
-          {
-            type: 'wordCloud',
-            // 默认circle为圆形
-            // cardioid (apple or heart shape curve, the most known polar equation), diamond (
-            // alias of square), triangle-forward, triangle, (alias of triangle-upright, pentagon, and star.
-            shape: 'circle',
-            // 可以自选图片 var maskImage = new Image(); maskImage.src = data.image
-            // maskImage: maskImage,
-            // 词云位置默认 center 宽高 75% x 80%.
-            left: 'center',
-            top: 'center',
-            width: '70%',
-            height: '80%',
-            right: null,
-            bottom: null,
-            // 词云文字大小，默认12px-60px.
-            sizeRange: [12, 60],
-            // 文字旋转角度，每步45度
-            rotationRange: [-90, 90],
-            rotationStep: 45,
-            // size of the grid in pixels for marking the availability of the canvas
-            // the larger the grid size, the bigger the gap between words.
-            gridSize: 8,
-            // 允许将词绘制到画布之外
-            drawOutOfBound: false,
-            // 全局文本样式
-            textStyle: {
-              normal: {
-                fontFamily: 'sans-serif',
-                fontWeight: 'bold',
-                // Color can be a callback function or a color string
-                color: function () {
-                  // Random color
-                  return (
-                    'rgb(' +
-                    [
-                      Math.round(Math.random() * 160),
-                      Math.round(Math.random() * 160),
-                      Math.round(Math.random() * 160),
-                    ].join(',') +
-                    ')'
-                  )
-                },
-              },
-              emphasis: {
-                shadowBlur: 10,
-                shadowColor: '#333',
-              },
-            },
-            data: [],
-            // Data is an array. Each array item must have name and value property.
-            // data: [
-            //   {
-            //     name: 'Farrah Abraham',
-            //     value: 366,
-            //     // Style of single text
-            //     textStyle: {
-            //       normal: {},
-            //       emphasis: {},
-            //     },
-            //   },
-            // ],
-          },
-        ],
-      },
+      barChart: null,
+      barData: [],
+      dateList: [],
+      colorList: ['#9E87FF', '#9effff'],
+      options: {},
     }
   },
   mounted() {
-    this.wordCloudChart = this.$echarts.init(
-      document.querySelector('.word-cloud'),
+    this.barChart = echarts.init(
+      document.querySelector('.bar-chart'),
       'macarons'
     )
-    this.wordCloudData = [
-      {
-        name: '体育',
-        value: 10,
+    this.options = {
+      backgroundColor: '#fff',
+      grid: {
+        top: '15%',
+        right: '10%',
+        left: '10%',
+        bottom: '12%',
       },
-      {
-        name: '修仙',
-        value: 20,
-      },
-      {
-        name: '军事',
-        value: 16,
-      },
-      {
-        name: '娱乐',
-        value: 30,
-      },
-      {
-        name: '文体',
-        value: 22,
-      },
-      {
-        name: '教育',
-        value: 80,
-      },
-      {
-        name: '时政',
-        value: 60,
-      },
-      {
-        name: '文化',
-        value: 16,
-      },
-      {
-        name: '游戏',
-        value: 25,
-      },
-    ]
+      xAxis: [
+        {
+          type: 'category',
+          color: '#59588D',
+          data: [],
+          axisLabel: {
+            interval: 0,
+            textStyle: {
+              color: '#556677',
+            },
+            fontSize: 12,
+            margin: 15,
+          },
+          axisTick: {
+            show: false,
+          },
+        },
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          axisLabel: {
+            textStyle: {
+              color: '#556677',
+            },
+          },
+          axisLine: {
+            show: false,
+            lineStyle: {
+              color: '#DCE2E8',
+            },
+          },
+          axisTick: {
+            show: false,
+          },
+        },
+      ],
+      series: [
+        {
+          type: 'bar',
+          data: [],
+          barWidth: '50px',
+          itemStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(
+                0,
+                0,
+                0,
+                1,
+                [
+                  {
+                    offset: 0,
+                    color: this.colorList[0],
+                  },
+                  {
+                    offset: 1,
+                    color: this.colorList[1],
+                  },
+                ],
+                false
+              ),
+              barBorderRadius: [30, 30, 0, 0],
+            },
+          },
+          label: {
+            normal: {
+              show: true,
+              fontSize: 18,
+              fontWeight: 'bold',
+              color: '#333',
+              position: 'top',
+            },
+          },
+        },
+      ],
+    }
+
+    this.dateList = ['12-30', '12-31', '1-1', '1-2', '1-3', '1-4', '1-5']
+    this.barData = [10, 10, 30, 12, 15, 3, 7]
+
     this.initChart()
-    window.addEventListener('resize', () => {
-      throttle(this.wordCloudChart.resize(), 200)
-    })
   },
   methods: {
     initChart() {
-      this.options.series[0].data = this.wordCloudData
-      this.wordCloudChart.setOption(this.options)
+      this.options.xAxis[0].data = this.dateList
+      this.options.series[0].data = this.barData
+
+      this.barChart.setOption(this.options)
+      setTimeout(() => {
+        this.barChart.resize()
+      }, 100)
+      window.addEventListener('resize', () => {
+        throttle(this.barChart.resize(), 200)
+      })
     },
   },
 }
 </script>
 
 <style>
-.word-cloud {
+.bar-chart {
   width: 100%;
-  height: 300px;
+  height: 360px;
 }
 </style>

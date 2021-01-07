@@ -17,12 +17,19 @@ export default [
         name: 'AnalysisIndex',
         meta: {
           icon: 'icontubiaobingzhuangtu',
-          title: '统计图表',
-          activeMenu: 'analysis-index',
-          openMenu: '/news-analysis'
+          title: '统计图表'
         },
         component: () => import(/* webpackChunkName: 'newsAnalysis' */ '../views/NewsAnalysis/NewsAnalysis.vue')
-      }
+      },
+      {
+        path: '/news-analysis/news-map',
+        name: 'NewsMap',
+        meta: {
+          icon: 'icontubiao_ditu',
+          title: '总量地图'
+        },
+        component: () => import(/* webpackChunkName: 'newsAnalysis' */ '../views/NewsAnalysis/NewsMap.vue')
+      },
     ]
   }
 ]

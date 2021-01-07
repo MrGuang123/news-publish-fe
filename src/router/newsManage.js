@@ -18,8 +18,6 @@ export default [
         meta: {
           icon: 'iconliebiao',
           title: '全部新闻',
-          activeMenu: 'news-list',
-          openMenu: '/news-manage'
         },
         component: () => import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsList.vue')
       },
@@ -29,8 +27,6 @@ export default [
         meta: {
           icon: 'iconziyuan314',
           title: '我的新闻',
-          activeMenu: 'my-news',
-          openMenu: '/news-manage'
         },
         component: () => import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/MyNews.vue')
       },
@@ -39,8 +35,6 @@ export default [
         name: 'NewsDetail',
         meta: {
           title: '新闻详情',
-          activeMenu: 'news-list',
-          openMenu: '/news-manage'
         },
         hideInMenu: true,
         component: () => import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsDetail.vue')

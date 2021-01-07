@@ -12,9 +12,9 @@ import store from "./store";
 
 // 将iconfont注册为antd组件
 const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_2298558_1v9oy4jabg4.js',
+  scriptUrl: '//at.alicdn.com/t/font_2298558_beoral6kb3k.js',
 })
-Vue.component(IconFont)
+Vue.component('icon-font',IconFont)
 
 Vue.use(Antd)
 

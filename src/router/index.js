@@ -49,8 +49,6 @@ const routes = [
           icon: 'iconshouye',
           title: '首页',
           auth: ['user', 'admin'],
-          activeMenu: '/home',
-          openMenu: '/'
         },
         component: () =>
           import(/* webpackChunkName: "home" */ '../views/Home/Home.vue'),
