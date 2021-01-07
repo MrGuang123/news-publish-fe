@@ -11,6 +11,12 @@ module.exports = {
     // 除了生产环境都启用sourceMap
     config.devtool = process.env.NODE_ENV === 'production' ? '' : 'source-map'
   },
+  chainWebpack: config => {
+    config.plugin('html').tap(args => {
+      args[0].title = '新闻发布系统'
+      return args
+    })
+  },
   // 关闭生产环境sourceMap，构建加速
   productionSourceMap: false,
   // 是否提取css，相当于extractTextPlugin插件

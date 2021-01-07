@@ -8,11 +8,13 @@
 <script>
 // import GeoJson from '../../assets/js/geo'
 import { generateData, mockData } from './mapUtil'
-const echarts = require('echarts')
-// require('echarts/lib/chart/map')
-// require('echarts/lib/chart/lines')
-// require('echarts/lib/component/geo')
-// require('echarts/lib/chart/effectScatter')
+const echarts = require('echarts/lib/echarts')
+import china from 'echarts/map/json/china.json'
+echarts.registerMap('china', china)
+require('echarts/lib/chart/map')
+require('echarts/lib/chart/lines')
+require('echarts/lib/component/geo')
+require('echarts/lib/chart/effectScatter')
 // require('echarts/lib/action/geoRoam')
 // require('echarts/lib/action/roamHelper')
 export default {
@@ -324,6 +326,7 @@ export default {
 
 <style lang="scss">
 .news-map {
+  padding-bottom: 20px;
   .list-title {
     font-size: 16px;
     margin-bottom: 16px;

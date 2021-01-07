@@ -35,6 +35,7 @@ export default {
 </script>
 <style lang="scss">
 .news-analysis {
+  padding-bottom: 20px;
   .list-title {
     font-size: 16px;
     margin-bottom: 16px;
@@ -42,11 +43,11 @@ export default {
   .analysis-row {
     margin-bottom: 16px;
     width: 100%;
+    display: flex;
     .chart-item {
       border-radius: 6px;
       overflow: hidden;
-      width: 49%;
-      float: left;
+      flex: 1;
       & + .chart-item {
         margin-left: 2%;
       }
