@@ -9,13 +9,13 @@
         <a-button type="primary" ghost shape="round" @click="download">下载新闻</a-button>
         <a-button type="primary" shape="round" @click="download('all')">全部下载</a-button>
       </div>
-      <a-table :row-selection="rowSelection" :data-source="data" :pagination="false">
+      <a-table :row-selection="rowSelection()" :data-source="data" :pagination="false">
         <a-table-column key="title" title="新闻标题" data-index="title" />
         <a-table-column key="author" title="作者" data-index="author" />
         <a-table-column key="publishTime" title="发布时间" data-index="publishTime"></a-table-column>
         <a-table-column key="readCount" title="阅读数" data-index="readCount" width="80px"></a-table-column>
         <a-table-column key="action" title="Action" align="center" width="160px">
-          <template #default="{ record }">
+          <template slot-scope="text, record">
             <span class="list-action" @click="findDetail(record)">查看</span>
           </template>
         </a-table-column>
@@ -77,7 +77,7 @@ export default {
             selectedRows
           )
         },
-        getCheckboxProps: (record) => ({
+        getCheckboxProps: record => ({
           disabled: record.name === 'Disabled User', // Column configuration not to be checked
           name: record.name,
         }),
@@ -124,7 +124,7 @@ export default {
     margin-top: 16px;
   }
 
-  ::v-deep(.ant-pagination) {
+  ::v-deep .ant-pagination {
     display: flex;
     justify-content: flex-end;
   }

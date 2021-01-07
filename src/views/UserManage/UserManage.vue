@@ -1,7 +1,7 @@
 <template>
   <div class="user-manage">
     <div class="user-header">
-      <h3 class="list-title">全部新闻</h3>
+      <h3 class="list-title">用户列表</h3>
       <a-input-search class="list-search" v-model="searchValue" placeholder="请输入用户名称" enter-button="搜索" @search="onSearch" />
       <a-button type="primary" @click="createUser" style="float:right;">新建用户</a-button>
     </div>

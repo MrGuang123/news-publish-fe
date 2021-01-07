@@ -1,7 +1,7 @@
 <template>
   <div class="my-news">
     <div class="news-header">
-      <h3 class="list-title">全部新闻</h3>
+      <h3 class="list-title">我的新闻</h3>
       <a-input-search class="list-search" v-model="searchValue" placeholder="请输入新闻标题" enter-button="搜索" @search="onSearch" />
       <a-button type="primary" @click="createNews" style="float:right;">新建新闻</a-button>
     </div>
@@ -10,40 +10,70 @@
         <a-button type="primary" ghost shape="round" @click="download">下载新闻</a-button>
         <a-button type="primary" shape="round" @click="download('all')">全部下载</a-button>
       </div>
-      <a-table :row-selection="rowSelection" :data-source="data" :pagination="false">
+      <a-table :row-selection="rowSelection()" :data-source="data" :pagination="false">
         <a-table-column key="title" title="新闻标题" data-index="title" />
         <a-table-column key="author" title="作者" data-index="author" />
         <a-table-column key="publishTime" title="发布时间" data-index="publishTime"></a-table-column>
         <a-table-column key="readCount" title="阅读数" data-index="readCount" width="100px"></a-table-column>
         <a-table-column key="action" title="操作" align="center" width="200px">
-          <template #default="{ record }">
+          <template slot-scope="record">
             <span class="list-action" @click="findDetail(record)">查看</span>
             <span class="list-action" @click="editNews(record)">编辑</span>
             <span class="list-action" @click="deleteNews(record)">删除</span>
           </template>
         </a-table-column>
       </a-table>
+      <!-- <a-table :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }" :data-source="data">
+        <a-table-column key="name"></a-table-column>
+      </a-table> -->
       <a-pagination class="pagination" show-quick-jumper :current="pageInfo.pageIndex" :pageSize="pageInfo.pageSize" :total="pageInfo.total" @change="onChange" />
     </div>
   </div>
 </template>
 
 <script>
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+  },
+]
+
+const data = []
+for (let i = 0; i < 46; i++) {
+  data.push({
+    title: 'test1',
+    author: 'tom',
+    publishTime: '2021-1-1',
+    readCount: 20,
+    key: i,
+  })
+}
 export default {
   name: 'MyNews',
   data() {
     return {
       searchValue: '',
-      // data
-      data: [
-        {
-          title: 'test1',
-          author: 'tom',
-          publishTime: '2021-1-1',
-          readCount: 20,
-          key: 1,
-        },
-      ],
+      data,
+      columns,
+      selectedRowKeys: [],
+      // data: [
+      //   {
+      //     title: 'test1',
+      //     author: 'tom',
+      //     publishTime: '2021-1-1',
+      //     readCount: 20,
+      //     key: 1,
+      //   },
+      // ],
       pageInfo: {
         pageIndex: 1,
         pageSize: 10,
@@ -78,19 +108,16 @@ export default {
       this.pageInfo.pageIndex = pageIndex
       console.log(pageIndex)
     },
+    onSelectChange(selectedRowKeys) {
+      console.log('selectedRowKeys changed: ', selectedRowKeys)
+      this.selectedRowKeys = selectedRowKeys
+    },
     rowSelection() {
       return {
-        onChange: (selectedRowKeys, selectedRows) => {
-          console.log(
-            `selectedRowKeys: ${selectedRowKeys}`,
-            'selectedRows: ',
-            selectedRows
-          )
+        onChange: selectedRowKeys => {
+          console.log(`selectedRowKeys: ${selectedRowKeys}`)
         },
-        getCheckboxProps: (record) => ({
-          disabled: record.name === 'Disabled User', // Column configuration not to be checked
-          name: record.name,
-        }),
+        selectedRowKeys: [],
       }
     },
   },
@@ -134,7 +161,7 @@ export default {
     margin-top: 16px;
   }
 
-  ::v-deep(.ant-pagination) {
+  ::v-deep .ant-pagination {
     display: flex;
     justify-content: flex-end;
   }

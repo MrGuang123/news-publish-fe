@@ -21,7 +21,7 @@ export default [
           activeMenu: 'user-index',
           openMenu: '/user-manage'
         },
-        component: import(/* webpackChunkName: 'userManage' */ '../views/UserManage/UserManage.vue')
+        component: () => import(/* webpackChunkName: 'userManage' */ '../views/UserManage/UserManage.vue')
       }
     ]
   }

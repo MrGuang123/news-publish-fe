@@ -14,7 +14,7 @@ export default [
     children: [
       {
         path: '/news-analysis/analysis-index',
-        name: 'NewsAnalysis',
+        name: 'AnalysisIndex',
         meta: {
           icon: 'icontubiaobingzhuangtu',
           title: '统计图表',

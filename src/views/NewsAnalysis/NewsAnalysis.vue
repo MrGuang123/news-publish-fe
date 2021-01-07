@@ -1,6 +1,6 @@
 <template>
   <div class="news-analysis">
-    <h3 class="list-title">图表分析</h3>
+    <h3 class="list-title">统计图表</h3>
     <a-row class="analysis-row">
       <a-col :span="24">
         <WordCloudChart></WordCloudChart>

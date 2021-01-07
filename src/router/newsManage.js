@@ -21,7 +21,7 @@ export default [
           activeMenu: 'news-list',
           openMenu: '/news-manage'
         },
-        component: import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsList.vue')
+        component: () => import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsList.vue')
       },
       {
         path: '/news-manage/my-news',
@@ -32,7 +32,7 @@ export default [
           activeMenu: 'my-news',
           openMenu: '/news-manage'
         },
-        component: import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/MyNews.vue')
+        component: () => import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/MyNews.vue')
       },
       {
         path: '/news-manage/news-detail',
@@ -43,7 +43,7 @@ export default [
           openMenu: '/news-manage'
         },
         hideInMenu: true,
-        component: import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsDetail.vue')
+        component: () => import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsDetail.vue')
       }
     ]
   }

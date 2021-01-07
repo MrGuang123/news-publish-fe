@@ -16,6 +16,11 @@ NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
 
 Vue.use(VueRouter);
 
+const originRouterPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originRouterPush.call(this, location).catch(error => error)
+}
+
 const routes = [
   {
     path: '/login',

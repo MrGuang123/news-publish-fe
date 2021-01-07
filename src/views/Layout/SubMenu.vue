@@ -4,7 +4,7 @@
       <a-icon type="mail" /><span>{{ props.menuInfo.meta.title }}</span>
     </span>
     <template v-for="item in props.menuInfo.children">
-      <a-menu-item v-if="!item.children" :key="item.path">
+      <a-menu-item v-if="!item.children" :key="item.path" @click="() => parent.$router.push({path: item.path, query: parent.$router.query})">
         <a-icon type="pie-chart" />
         <span>{{ item.meta.title }}</span>
       </a-menu-item>

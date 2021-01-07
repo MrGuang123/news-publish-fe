@@ -21,7 +21,7 @@ export default [
           activeMenu: 'label-index',
           openMenu: '/label-manage'
         },
-        component: import(/* webpackChunkName: 'LabelManage' */ '../views/LabelManage/LabelManage.vue')
+        component: () => import(/* webpackChunkName: 'LabelManage' */ '../views/LabelManage/LabelManage.vue')
       }
     ]
   }
