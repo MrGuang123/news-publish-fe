@@ -3,6 +3,7 @@
 </template>
 
 <script>
+// TODO: 添加图片，添加返回上一页和返回首页
 export default {
   name: '404',
 }

@@ -31,13 +31,16 @@ export default [
         component: () => import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/MyNews.vue')
       },
       {
-        path: '/news-manage/news-detail',
+        path: '/news-manage/create-news',
         name: 'NewsDetail',
-        meta: {
-          title: '新闻详情',
-        },
         hideInMenu: true,
-        component: () => import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsDetail.vue')
+        selectOtherPath: true,
+        meta: {
+          title: '创建新闻',
+          selectedPath: '/news-manage/my-news',
+          openedPath: '/news-manage'
+        },
+        component: () => import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/CreateNews.vue')
       }
     ]
   }

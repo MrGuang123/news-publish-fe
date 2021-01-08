@@ -87,7 +87,11 @@ export default {
   },
   methods: {
     onSearch() {},
-    createNews() {},
+    createNews() {
+      this.$router.push({
+        path: '/news-manage/create-news',
+      })
+    },
     findDetail(record) {
       console.log(record)
     },

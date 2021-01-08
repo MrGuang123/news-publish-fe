@@ -57,6 +57,8 @@ export default {
     this.menuData = this.getMenuList(this.$router.options.routes)
     this.selectedKeys = this.selectedKeysMap[this.$route.path]
     this.openKeys = this.collapsed ? [] : this.openKeysMap[this.$route.path]
+    console.log('this.selectedKeysMap', this.selectedKeysMap)
+    console.log('this.openKeysMap', this.openKeysMap)
   },
   methods: {
     // 获取路由菜单数据
@@ -64,12 +66,21 @@ export default {
       const menuData = []
 
       routes.forEach(item => {
+        // !item.hideInMenu && selectOtherPath代表不显示在菜单，但是打开和选中meta中的指定标签
+        if (item.selectOtherPath) {
+          this.openKeysMap[item.path] = [item.meta.openedPath]
+          this.selectedKeysMap[item.path] = [item.meta.selectedPath]
+        }
+
         // 定义规则为路由信息有name和hideInMenu为false时候展示到菜单栏中
         if (item.name && !item.hideInMenu) {
           // 将key为当前路由，value为父路由的数组存储到打开菜单的映射中
           this.openKeysMap[item.path] = parentKeys
           // 将key为当前路由，value为选中的key或者当前路由存储到选中菜单映射中
-          this.selectedKeysMap[item.path] = [selectedKey || item.path]
+          this.selectedKeysMap[item.path] = [
+            item.meta.selectedPath || selectedKey || item.path,
+          ]
+
           // 浅拷贝一份当前路由信息并且删除children
           const newItem = { ...item }
           delete newItem.children

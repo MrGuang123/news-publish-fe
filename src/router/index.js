@@ -60,7 +60,7 @@ const routes = [
   ...LabelManage,
   ...NewsAnalysis,
   {
-    path: '/404',
+    path: '*',
     name: '404',
     meta: {
       title: '404'

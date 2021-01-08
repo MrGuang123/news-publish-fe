@@ -15,8 +15,6 @@ require('echarts/lib/chart/map')
 require('echarts/lib/chart/lines')
 require('echarts/lib/component/geo')
 require('echarts/lib/chart/effectScatter')
-// require('echarts/lib/action/geoRoam')
-// require('echarts/lib/action/roamHelper')
 export default {
   name: 'NewsMap',
   data() {
@@ -42,7 +40,8 @@ export default {
             return res
           },
         },
-        backgroundColor: '#013954',
+        backgroundColor: '#fff',
+        // backgroundColor: '#013954',
         geo: {
           map: 'china',
           zoom: 1.2,
@@ -316,8 +315,10 @@ export default {
           lineStyle: { color: '#96cc34' },
         },
       ]
-      this.mapOptions.series[0].data = test1
-      this.mapOptions.series[1].data = test2
+      console.log(test1, test2)
+
+      this.mapOptions.series[0].data = pointData
+      this.mapOptions.series[1].data = lineData
       this.mapChart.setOption(this.mapOptions, true)
     },
   },

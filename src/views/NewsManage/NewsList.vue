@@ -9,7 +9,7 @@
         <a-button type="primary" ghost shape="round" @click="download">下载新闻</a-button>
         <a-button type="primary" shape="round" @click="download('all')">全部下载</a-button>
       </div>
-      <a-table :row-selection="rowSelection()" :data-source="data" :pagination="false">
+      <a-table :row-selection="rowSelection()" :data-source="newsList" :pagination="false">
         <a-table-column key="title" title="新闻标题" data-index="title" />
         <a-table-column key="author" title="作者" data-index="author" />
         <a-table-column key="publishTime" title="发布时间" data-index="publishTime"></a-table-column>
@@ -31,8 +31,7 @@ export default {
   data() {
     return {
       searchValue: '',
-      // data
-      data: [
+      newsList: [
         {
           title: 'test1',
           author: 'tom',
@@ -54,6 +53,7 @@ export default {
   },
   methods: {
     onSearch() {},
+    handleChange() {},
     findDetail(record) {
       console.log(record)
     },
