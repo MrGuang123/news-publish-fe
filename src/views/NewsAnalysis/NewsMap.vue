@@ -1,6 +1,8 @@
 <template>
   <div class="news-map">
-    <h3 class="list-title">总量地图</h3>
+    <div class="analysis-header">
+      <h3 class="list-title">总量地图</h3>
+    </div>
     <div class="map-content"></div>
   </div>
 </template>
@@ -328,9 +330,11 @@ export default {
 <style lang="scss">
 .news-map {
   padding-bottom: 20px;
-  .list-title {
-    font-size: 16px;
-    margin-bottom: 16px;
+  .analysis-header {
+    @extend .panel-common;
+    .list-title {
+      font-size: 16px;
+    }
   }
   .map-content {
     height: 720px;

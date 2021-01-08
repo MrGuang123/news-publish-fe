@@ -67,7 +67,7 @@ export default {
 
       routes.forEach(item => {
         // !item.hideInMenu && selectOtherPath代表不显示在菜单，但是打开和选中meta中的指定标签
-        if (item.selectOtherPath) {
+        if (item.hideInMenu && item.selectOtherPath) {
           this.openKeysMap[item.path] = [item.meta.openedPath]
           this.selectedKeysMap[item.path] = [item.meta.selectedPath]
         }

@@ -27,6 +27,7 @@ export default {
 .main {
   padding: 10px;
   min-width: 1000px;
+  height: calc(100vh - 64px);
   .breadcrumb {
     margin-bottom: 16px;
   }

@@ -1,6 +1,8 @@
 <template>
   <div class="news-analysis">
-    <h3 class="list-title">统计图表</h3>
+    <div class="analysis-header">
+      <h3 class="list-title">统计图表</h3>
+    </div>
     <a-row class="analysis-row">
       <a-col :span="24">
         <WordCloudChart></WordCloudChart>
@@ -36,9 +38,11 @@ export default {
 <style lang="scss">
 .news-analysis {
   padding-bottom: 20px;
-  .list-title {
-    font-size: 16px;
-    margin-bottom: 16px;
+  .analysis-header {
+    @extend .panel-common;
+    .list-title {
+      font-size: 16px;
+    }
   }
   .analysis-row {
     margin-bottom: 16px;

@@ -22,7 +22,14 @@ module.exports = {
   // 是否提取css，相当于extractTextPlugin插件
   css: {
     extract: true,
-    sourceMap: process.env.NODE_ENV !== 'production'
+    sourceMap: process.env.NODE_ENV !== 'production',
+    // 插入通用scss，
+    // 通过在App.vue引入，只能在template使用，但是在scss里使用@extend等方法会找不到
+    loaderOptions: {
+      sass: {
+        prependData: `@import "@/assets/style/index.scss";`
+      }
+    }
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
