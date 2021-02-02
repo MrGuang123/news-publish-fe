@@ -9,19 +9,36 @@
     </div>
     <div class="create-content">
       <a-form :form="formData" label-align="right" :label-col="formItemLayout.labelCol" :wrapper-col="formItemLayout.wrapperCol">
-        <a-form-item label="新闻标题：" name="title">
-          <a-input placeholder="请输入新闻标题" />
+        <a-row :gutter="24">
+          <a-col :offset="2" :span="9">
+            <a-form-item label="选择地区：" name="areaId" :validate-status="validate.areaIdStatus" :help="validate.areaIdHelp">
+              <a-select v-model="formData.areaId" @change="areaChange">
+                <a-select-option v-for="item in geoMap" :value="item.value" :key="item.name">{{item.name}}</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+          <a-col :span="9">
+            <a-form-item label="选择标签：" name="labelIds" :validate-status="validate.labelIdsStatus" :help="validate.labelIdsHelp">
+              <a-select v-model="formData.labelIds" mode="multiple" @change="labelChange">
+                <a-select-option v-for="item in geoMap" :value="item.value" :key="item.name">{{item.name}}</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <a-form-item label="新闻标题：" name="title" :validate-status="validate.titleStatus" :help="validate.titleHelp">
+          <a-input v-model="formData.title" placeholder="请输入新闻标题" />
         </a-form-item>
-        <a-form-item label="新闻摘要：" name="summary">
-          <a-input placeholder="请输入新闻摘要" />
+        <a-form-item label="新闻摘要：" name="summary" :validate-status="validate.summaryStatus" :help="validate.summaryHelp">
+          <a-input v-model="formData.summary" placeholder="请输入新闻摘要" />
         </a-form-item>
       </a-form>
       <div class="editor">
-        <div id="editorDom"></div>
+        <div id="editorDom" :class="{'editor-error': validate.editorError}"></div>
+        <div v-if="validate.editorError" style="color:#f5222d;">{{validate.editorError}}</div>
       </div>
       <div class="content-footer">
-        <a-button type="primary" class="btn-control" ghost shape="round">发布新闻</a-button>
-        <a-button type="primary" class="btn-control" shape="round">暂存新闻</a-button>
+        <a-button type="primary" class="btn-control" ghost shape="round" @click="submitNews(1)">发布新闻</a-button>
+        <a-button type="primary" class="btn-control" shape="round" @click="submitNews(0)">暂存新闻</a-button>
       </div>
     </div>
   </div>
@@ -29,6 +46,7 @@
 
 <script>
 import wangEditor from 'wangeditor'
+import { geoMap } from '../../assets/js/geoMap'
 export default {
   name: 'NewsDetail',
   data() {
@@ -38,11 +56,26 @@ export default {
         wrapperCol: { span: 12 },
       },
       formData: {
-        title: '',
-        summary: '',
+        title: 'aaa',
+        summary: 'aaa',
+        areaId: 0,
+        labelIds: [],
+      },
+      validate: {
+        titleStatus: '',
+        titleHelp: '',
+        summaryStatus: '',
+        summaryHelp: '',
+        areaIdStatus: '',
+        areaIdHelp: '',
+        labelIdsStatus: '',
+        labelIdsHelp: '',
+        editorError: '',
       },
       editor: null,
       editorContent: '',
+      // 地图数据
+      geoMap,
     }
   },
   mounted() {
@@ -81,7 +114,41 @@ export default {
     getEditorData() {
       // 通过代码获取编辑器内容
       let data = this.editor.txt.html()
-      alert(data)
+      console.log(data)
+      return data
+    },
+    areaChange(value) {
+      console.log(value)
+    },
+    labelChange(value) {
+      console.log(value)
+    },
+    // 表单手动校验
+    checkData() {
+      const errorInfo = {
+        title: '请填写标题',
+        summary: '请填写摘要',
+        areaId: '请选择一个地址',
+        labelIds: '请选择1-3个标签',
+      }
+      for (let key in this.formData) {
+        this.validate[`${key}Status`] = ''
+        this.validate[`${key}Help`] = ''
+        if (this.formData[key] === '' || this.formData[key].length === 0) {
+          this.validate[`${key}Status`] = 'error'
+          this.validate[`${key}Help`] = errorInfo[key]
+        }
+      }
+
+      const content = this.getEditorData()
+      this.validate.editorError = ''
+      if (!content) {
+        this.validate.editorError = '请输入新闻内容'
+      }
+    },
+    submitNews() {
+      this.checkData()
+      console.log(this.formData)
     },
   },
   beforeDestroy() {
@@ -115,6 +182,13 @@ export default {
     .content-footer {
       display: flex;
       justify-content: center;
+    }
+  }
+
+  .editor-error {
+    .w-e-toolbar,
+    .w-e-text-container {
+      border-color: #f5222d !important;
     }
   }
 }

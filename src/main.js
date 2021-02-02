@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Antd from 'ant-design-vue';
-import { Icon } from 'ant-design-vue';
+import { Icon, FormModel } from 'ant-design-vue';
 import VueI18n from 'vue-i18n'
 import queryString from 'query-string'
 
@@ -21,6 +21,8 @@ const IconFont = Icon.createFromIconfontCN({
 Vue.component('icon-font', IconFont)
 
 Vue.use(Antd)
+// 使用表单的双向绑定还得单独弄个模块，服气了。。。
+Vue.use(FormModel)
 Vue.use(VueI18n)
 
 const i18n = new VueI18n({

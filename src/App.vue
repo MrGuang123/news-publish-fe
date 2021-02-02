@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <a-locale-provider :locale="locale">
+    <!-- a-locale-provider已经弃用 -->
+    <!-- 报错信息：Warning: [antd: LocaleProvider] LocaleProvider is deprecated. Please use locale with `Config -->
+    <a-config-provider :locale="locale">
       <router-view />
-    </a-locale-provider>
+    </a-config-provider>
   </div>
 </template>
 <script>

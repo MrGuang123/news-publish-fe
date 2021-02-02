@@ -17,6 +17,7 @@ require('echarts/lib/chart/map')
 require('echarts/lib/chart/lines')
 require('echarts/lib/component/geo')
 require('echarts/lib/chart/effectScatter')
+require('echarts/lib/component/tooltip')
 export default {
   name: 'NewsMap',
   data() {
@@ -26,7 +27,7 @@ export default {
       mapOptions: {
         tooltip: {
           trigger: 'item',
-          backgroundColor: 'rgba(166, 200, 76, 0.82)',
+          backgroundColor: 'rgba(0, 0, 0, 0.66)',
           borderColor: '#FFFFCC',
           showDelay: 0,
           hideDelay: 0,
@@ -49,8 +50,11 @@ export default {
           zoom: 1.2,
           aspectScale: 0.75,
           label: {
+            normal: {
+              show: true,
+            },
             emphasis: {
-              show: false,
+              show: true,
             },
           },
           //是否允许缩放
@@ -84,26 +88,42 @@ export default {
             },
             emphasis: {
               //悬浮背景色
-              color: 'rgba(37, 43, 61, .5)',
-            },
-          },
-          regions: [
-            {
-              name: '南海诸岛',
-              itemStyle: {
-                areaColor: 'rgba(0, 10, 52, 1)',
-
-                borderColor: 'rgba(0, 10, 52, 1)',
-                normal: {
-                  opacity: 0,
-                  label: {
-                    show: false,
-                    color: '#009cc9',
+              color: {
+                type: 'radial',
+                x: 0.5,
+                y: 0.5,
+                r: 0.8,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: '#9effff',
                   },
-                },
+                  {
+                    offset: 1,
+                    color: '#9E87FF',
+                  },
+                ],
+                globalCoord: true,
               },
             },
-          ],
+          },
+          // regions: [
+          //   {
+          //     name: '南海诸岛',
+          //     itemStyle: {
+          //       areaColor: 'rgba(0, 10, 52, 1)',
+
+          //       borderColor: 'rgba(0, 10, 52, 1)',
+          //       normal: {
+          //         opacity: 0,
+          //         label: {
+          //           show: true,
+          //           color: '#009cc9',
+          //         },
+          //       },
+          //     },
+          //   },
+          // ],
         },
         series: [
           {
@@ -122,8 +142,8 @@ export default {
                 formatter: '{b}',
                 position: 'right',
                 offset: [15, 0],
-                color: '#1DE9B6',
-                show: true,
+                color: '#666',
+                show: false,
               },
             },
             itemStyle: {
