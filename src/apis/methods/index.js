@@ -1,8 +1,9 @@
 import HomeMethods from './home'
 import NewsManage from './newsManage'
+import Login from './login'
 
-console.log('methods', HomeMethods)
 export default {
+  ...Login,
   ...HomeMethods,
   ...NewsManage
 }

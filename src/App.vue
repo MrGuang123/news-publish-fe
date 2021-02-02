@@ -27,6 +27,9 @@ export default {
 }
 </script>
 <style lang="scss">
+#app {
+  height: 100%;
+}
 // @import './assets/style/index.scss';
 // @import './assets/style/custom.scss';
 </style>
