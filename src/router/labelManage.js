@@ -5,7 +5,7 @@ export default [
     path: '/label-manage',
     name: 'LabelManage',
     meta: {
-      title: '标签管理',
+      title: 'route.labelManage',
       icon: 'iconbiaoqian',
       auth: ['admin']
     },
@@ -17,7 +17,7 @@ export default [
         name: 'LabelIndex',
         meta: {
           icon: 'iconliebiao',
-          title: '标签列表',
+          title: 'route.labelManage_labelList',
         },
         component: () => import(/* webpackChunkName: 'LabelManage' */ '../views/LabelManage/LabelManage.vue')
       }

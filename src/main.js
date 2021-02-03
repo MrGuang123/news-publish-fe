@@ -25,17 +25,15 @@ Vue.use(Antd)
 Vue.use(FormModel)
 Vue.use(VueI18n)
 
-const i18n = new VueI18n({
+const i18nOption = {
   locale: queryString.parse(location.search).locale || 'zhCN',
   messages: {
-    zhCN: {
-      message: zhCN
-    },
-    enUS: {
-      message: enUS
-    }
+    zhCN,
+    enUS
   }
-})
+}
+console.log(i18nOption)
+const i18n = new VueI18n(i18nOption)
 
 // 当运行serve:mock的时候执行
 process.env.VUE_APP_MOCK && require('../Mock')
@@ -47,4 +45,4 @@ new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount("#app");
+}).$mount('#app');

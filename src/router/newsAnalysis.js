@@ -5,7 +5,7 @@ export default [
     path: '/news-analysis',
     name: 'NewsAnalysis',
     meta: {
-      title: '新闻统计',
+      title: 'route.newsAnalysis',
       icon: 'icontongji',
       auth: ['admin']
     },
@@ -17,7 +17,7 @@ export default [
         name: 'AnalysisIndex',
         meta: {
           icon: 'icontubiaobingzhuangtu',
-          title: '统计图表'
+          title: 'route.newsAnalysis_chart'
         },
         component: () => import(/* webpackChunkName: 'newsAnalysis' */ '../views/NewsAnalysis/NewsAnalysis.vue')
       },
@@ -26,7 +26,7 @@ export default [
         name: 'NewsMap',
         meta: {
           icon: 'icontubiao_ditu',
-          title: '总量地图'
+          title: 'route.newsAnalysis_map'
         },
         component: () => import(/* webpackChunkName: 'newsAnalysis' */ '../views/NewsAnalysis/NewsMap.vue')
       },

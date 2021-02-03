@@ -2,31 +2,14 @@
   <div class="header">
     <div class="set-theme">
       <icon-font type="icontubiao_ditu"></icon-font>
-      <icon-font type="icontubiaobingzhuangtu"></icon-font>
-      <icon-font type="iconziyuan314"></icon-font>
-      <icon-font type="iconshouye"></icon-font>
-      <icon-font type="iconxinwen"></icon-font>
-      <icon-font type="iconiconname"></icon-font>
-      <icon-font type="iconsuo"></icon-font>
-      <icon-font type="iconzhanghuzonglan"></icon-font>
-      <icon-font type="iconliebiao"></icon-font>
-      <icon-font type="iconbiaoqian"></icon-font>
-      <icon-font type="iconbianji"></icon-font>
-      <icon-font type="icontongji"></icon-font>
-      <icon-font type="iconyonghuguanli_huaban"></icon-font>
       <a-dropdown>
-        <a-menu
-          slot="overlay"
-          @click="changeTheme"
-          :selected-keys="selectedKey"
-        >
+        <a-menu slot="overlay" @click="changeTheme" :selected-keys="selectedKey">
           <a-menu-item v-for="item in themeData" :key="item.key">
             <a-icon type="user" />
             <span>{{ item.name }}</span>
           </a-menu-item>
         </a-menu>
-        <a-button class="btn-trigger"
-          >设置主题
+        <a-button class="btn-trigger">设置主题
           <a-icon type="down" />
         </a-button>
       </a-dropdown>
@@ -34,11 +17,7 @@
     <div class="set-locale">
       <a-dropdown>
         <!-- <a class="ant-dropdown-link" @click="e => e.preventDefault()">语言切换</a> -->
-        <a-menu
-          slot="overlay"
-          @click="changeLocale"
-          :selectedKeys="[$route.query.locale || 'zhCN']"
-        >
+        <a-menu slot="overlay" @click="changeLocale" :selectedKeys="[$route.query.locale || 'zhCN']">
           <a-menu-item key="zhCN">简体中文</a-menu-item>
           <a-menu-item key="enUS">English</a-menu-item>
         </a-menu>

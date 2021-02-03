@@ -5,7 +5,7 @@
       <template v-for="item in menuData">
         <a-menu-item v-if="!item.children" :key="item.path" @click="() => $router.push({path: item.path, query: $router.query})">
           <icon-font style="color: #fff;" v-if="item.meta.icon" :type="item.meta.icon"></icon-font>
-          <span>{{ item.meta.title }}</span>
+          <span>{{ $t(item.meta.title) }}</span>
         </a-menu-item>
         <sub-menu v-else :key="item.path" :menu-info="item" />
       </template>
@@ -57,8 +57,8 @@ export default {
     this.menuData = this.getMenuList(this.$router.options.routes)
     this.selectedKeys = this.selectedKeysMap[this.$route.path]
     this.openKeys = this.collapsed ? [] : this.openKeysMap[this.$route.path]
-    console.log('this.selectedKeysMap', this.selectedKeysMap)
-    console.log('this.openKeysMap', this.openKeysMap)
+    // console.log('this.selectedKeysMap', this.selectedKeysMap)
+    // console.log('this.openKeysMap', this.openKeysMap)
   },
   methods: {
     // 获取路由菜单数据

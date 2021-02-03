@@ -5,7 +5,7 @@ export default [
     path: '/news-manage',
     name: 'NewsManage',
     meta: {
-      title: '新闻管理',
+      title: 'route.newsManage',
       icon: 'iconxinwen',
       auth: ['admin']
     },
@@ -17,7 +17,7 @@ export default [
         name: 'NewsList',
         meta: {
           icon: 'iconliebiao',
-          title: '全部新闻',
+          title: 'route.newsManage_allNews',
         },
         component: () => import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/NewsList.vue')
       },
@@ -26,7 +26,7 @@ export default [
         name: 'MyNews',
         meta: {
           icon: 'iconziyuan314',
-          title: '我的新闻',
+          title: 'route.newsManage_myNews',
         },
         component: () => import(/* webpackChunkName: 'newsManage' */ '../views/NewsManage/MyNews.vue')
       },
@@ -36,7 +36,7 @@ export default [
         hideInMenu: true,
         selectOtherPath: true,
         meta: {
-          title: '创建新闻',
+          title: 'route.newsManage_createNews',
           selectedPath: '/news-manage/my-news',
           openedPath: '/news-manage'
         },

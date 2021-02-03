@@ -5,7 +5,7 @@ export default [
     path: '/user-manage',
     name: 'UserManage',
     meta: {
-      title: '用户管理',
+      title: 'route.userManage',
       icon: 'iconyonghuguanli_huaban',
       auth: ['admin']
     },
@@ -17,7 +17,7 @@ export default [
         name: 'UserIndex',
         meta: {
           icon: 'iconliebiao',
-          title: '用户列表',
+          title: 'route.userManage_userList',
           activeMenu: 'user-index',
           openMenu: '/user-manage'
         },

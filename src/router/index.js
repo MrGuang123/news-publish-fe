@@ -26,7 +26,7 @@ const routes = [
     path: '/login',
     name: 'Login',
     meta: {
-      title: '登录页'
+      title: 'route.loginPage'
     },
     hideInMenu: true,
     component: () => import(/* webpackChunkName: "login" */ '../views/Login/Login.vue')
@@ -47,7 +47,7 @@ const routes = [
         name: 'Home',
         meta: {
           icon: 'iconshouye',
-          title: '首页',
+          title: 'route.home',
           auth: ['user', 'admin'],
         },
         component: () =>
