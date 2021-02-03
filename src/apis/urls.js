@@ -24,8 +24,16 @@ const newsManage = {
   newsList: `${baseUrl}/news/newsList`,
 }
 
+/**
+ * 用户管理
+ */
+const userManage = {
+  userUrl: `${baseUrl}/users`
+}
+
 export default {
   ...loginUrl,
   ...homeURLs,
-  ...newsManage
+  ...newsManage,
+  ...userManage
 }

@@ -6,11 +6,14 @@
       <a-button type="primary" @click="createUser" style="float:right;">新建用户</a-button>
     </div>
     <div class="search-content">
-      <a-table :data-source="data" :pagination="false">
-        <a-table-column key="title" title="用户名称" data-index="title" />
-        <a-table-column key="author" title="角色类别" data-index="author" />
-        <a-table-column key="publishTime" title="创建人" data-index="publishTime"></a-table-column>
-        <a-table-column key="readCount" title="状态" data-index="readCount" width="80px"></a-table-column>
+      <a-table :data-source="newsList" :pagination="false">
+        <a-table-column key="userName" title="用户名称" data-index="userName" />
+        <a-table-column key="rolesName" title="角色类别" data-index="rolesName" />
+        <a-table-column key="createdAt" title="创建日期" data-index="createdAt" />
+        <a-table-column key="updatedAt" title="更新日期" data-index="updatedAt" />
+        <!-- TODO: 创建人和状态需要后面添加到接口 -->
+        <!-- <a-table-column key="publishTime" title="创建人" data-index="publishTime"></a-table-column>
+        <a-table-column key="readCount" title="状态" data-index="readCount" width="80px"></a-table-column> -->
         <a-table-column key="action" title="操作" align="center" width="240px">
           <template #default="{ record }">
             <span class="list-action" @click="findDetail(record)">查看</span>
@@ -26,21 +29,16 @@
 </template>
 
 <script>
+import { getUserList } from '../../apis/methods'
+
 export default {
   name: 'UserManage',
   data() {
     return {
       searchValue: '',
       // data
-      data: [
-        {
-          title: 'test1',
-          author: 'tom',
-          publishTime: '2021-1-1',
-          readCount: 20,
-          key: 1,
-        },
-      ],
+      newsList: [],
+      roles: ['管理员', '作者', '浏览者'],
       pageInfo: {
         pageIndex: 1,
         pageSize: 10,
@@ -50,9 +48,26 @@ export default {
   },
   computed: {},
   mounted() {
-    console.log(this.$route)
+    // console.log(getUserList)
+    this.getUserList()
   },
   methods: {
+    async getUserList() {
+      const result = await getUserList()
+      const { data } = result
+      if (data && data.length > 0) {
+        data.forEach(item => {
+          item.rolesName = this.handleRoles(item.roleIds)
+        })
+      }
+      this.newsList = data
+      this.pageInfo.total = data.length
+    },
+    handleRoles(roleIds) {
+      let roles = roleIds.split(',')
+      let rolesName = roles.map(roleId => this.roles[roleId])
+      return rolesName.join(',')
+    },
     onSearch() {},
     createUser() {},
     findDetail(record) {
@@ -109,7 +124,11 @@ export default {
     margin-top: 16px;
   }
 
-  ::v-deep(.ant-pagination) {
+  // ::v-deep(.ant-pagination) {
+  //   display: flex;
+  //   justify-content: flex-end;
+  // }
+  ::v-deep .ant-pagination {
     display: flex;
     justify-content: flex-end;
   }

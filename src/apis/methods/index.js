@@ -1,9 +1,4 @@
-import HomeMethods from './home'
-import NewsManage from './newsManage'
-import Login from './login'
-
-export default {
-  ...Login,
-  ...HomeMethods,
-  ...NewsManage
-}
+export * from './login'
+export * from './home'
+export * from './user'
+export * from './newsManage'

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { message } from 'ant-design-vue';
 
 let baseUrl = process.env.NODE_ENV === 'production' ? '' : ''
 // let loading = null
@@ -15,9 +16,9 @@ instance.interceptors.request.use(config => {
   // TODO: 添加loading
   const token = localStorage.getItem('token')
   if(token) {
-    config.header['authorization'] = `Bearer ${token}`
+    config.headers.authorization = `Bearer ${token}`
   }
-
+  
   return config
 })
 
@@ -32,7 +33,7 @@ instance.interceptors.response.use(data => {
   return Promise.reject(error)
 })
 
-export const aGet = (url, params) => {
+export const aGet = (url, params = {}) => {
   if(params.id) {
     url = `${url}/${params.id}`
     delete params.id
@@ -46,6 +47,7 @@ export const aGet = (url, params) => {
     }).then(res => {
       resolve(res.data)
     }).catch(err => {
+      message.error(err.message)
       reject(err.data)
     })
   })

@@ -1,7 +1,5 @@
 import * as types from '../type'
-import methods from '../../apis/methods'
-
-const { login } = methods
+import {login} from '../../apis/methods'
 
 export default {
   namespaced: true,

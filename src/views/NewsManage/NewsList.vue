@@ -2,60 +2,25 @@
   <div class="news-list">
     <div class="news-header">
       <h3 class="list-title">{{ $t('message')['app.newsManage.allNews'] }}</h3>
-      <a-input-search
-        class="list-search"
-        v-model="searchValue"
-        placeholder="请输入新闻标题"
-        enter-button="搜索"
-        @search="onSearch"
-      />
+      <a-input-search class="list-search" v-model="searchValue" placeholder="请输入新闻标题" enter-button="搜索" @search="onSearch" />
     </div>
     <div class="search-content">
       <div class="control-group">
-        <a-button type="primary" ghost shape="round" @click="download"
-          >下载新闻</a-button
-        >
-        <a-button type="primary" shape="round" @click="download('all')"
-          >全部下载</a-button
-        >
+        <a-button type="primary" ghost shape="round" @click="download">下载新闻</a-button>
+        <a-button type="primary" shape="round" @click="download('all')">全部下载</a-button>
       </div>
-      <a-table
-        :row-selection="rowSelection()"
-        :data-source="newsList"
-        :pagination="false"
-      >
+      <a-table :row-selection="rowSelection()" :data-source="newsList" :pagination="false">
         <a-table-column key="title" title="新闻标题" data-index="title" />
         <a-table-column key="author" title="作者" data-index="author" />
-        <a-table-column
-          key="publishTime"
-          title="发布时间"
-          data-index="publishTime"
-        ></a-table-column>
-        <a-table-column
-          key="readCount"
-          title="阅读数"
-          data-index="readCount"
-          width="80px"
-        ></a-table-column>
-        <a-table-column
-          key="action"
-          title="Action"
-          align="center"
-          width="160px"
-        >
+        <a-table-column key="publishTime" title="发布时间" data-index="publishTime"></a-table-column>
+        <a-table-column key="readCount" title="阅读数" data-index="readCount" width="80px"></a-table-column>
+        <a-table-column key="action" title="Action" align="center" width="160px">
           <template slot-scope="text, record">
             <span class="list-action" @click="findDetail(record)">查看</span>
           </template>
         </a-table-column>
       </a-table>
-      <a-pagination
-        class="pagination"
-        show-quick-jumper
-        :current="pageInfo.pageIndex"
-        :pageSize="pageInfo.pageSize"
-        :total="pageInfo.total"
-        @change="onChange"
-      />
+      <a-pagination class="pagination" show-quick-jumper :current="pageInfo.pageIndex" :pageSize="pageInfo.pageSize" :total="pageInfo.total" @change="onChange" />
     </div>
   </div>
 </template>
@@ -83,9 +48,7 @@ export default {
     }
   },
   computed: {},
-  mounted() {
-    console.log(this.$route)
-  },
+  mounted() {},
   methods: {
     onSearch() {},
     handleChange() {},

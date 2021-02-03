@@ -3,11 +3,7 @@
     <side-bar :collapsed="collapsed"></side-bar>
     <a-layout>
       <a-layout-header class="layout-header">
-        <a-icon
-          class="trigger"
-          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-          @click="() => (collapsed = !collapsed)"
-        />
+        <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="() => (collapsed = !collapsed)" />
         <Header></Header>
       </a-layout-header>
       <a-layout-content class="layout-content">
@@ -71,11 +67,6 @@ export default {
 .layout-wrap {
   min-height: 100vh !important;
   min-width: 1200px !important;
-  .logo {
-    height: 32px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 16px;
-  }
   .trigger {
     font-size: 18px;
     line-height: 64px;

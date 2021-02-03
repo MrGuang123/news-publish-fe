@@ -18,25 +18,8 @@ export default {
       locale: zhCN,
     }
   },
-  mounted() {
-    console.log('i18n Msg', this.$t('route.loginPage'))
-    console.log('i18n Msg', this.$t('route.home'))
-    console.log('i18n Msg', this.$t('route.newsManage'))
-    console.log('i18n Msg', this.$t('route.newsManage_allNews'))
-    console.log('i18n Msg', this.$t('route.newsManage_myNews'))
-    console.log('i18n Msg', this.$t('route.newsManage_createNews'))
-    console.log('i18n Msg', this.$t('route.userManage'))
-    console.log('i18n Msg', this.$t('route.userManage_userList'))
-    console.log('i18n Msg', this.$t('route.labelManage'))
-    console.log('i18n Msg', this.$t('route.labelManage_labelList'))
-    console.log('i18n Msg', this.$t('route.newsAnalysis'))
-    console.log('i18n Msg', this.$t('route.newsAnalysis_chart'))
-    console.log('i18n Msg', this.$t('route.newsAnalysis_map'))
-    console.log('i18n Msg', this.$t('route.404'))
-  },
   watch: {
     '$route.query.locale': function (value) {
-      console.log('i18n Msg', this.$t('route.userManage'))
       this.locale = value === 'enUS' ? enUS : zhCN
       moment.locale(value === 'enUS' ? 'en' : 'zh-cn')
     },

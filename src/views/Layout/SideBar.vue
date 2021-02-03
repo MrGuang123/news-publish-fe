@@ -1,6 +1,6 @@
 <template>
   <a-layout-sider :trigger="null" v-model="collapsed" collapsible>
-    <div class="logo"></div>
+    <div class="logo">新闻发布系统</div>
     <a-menu :selected-keys="selectedKeys" :open-keys.sync="openKeys" mode="inline" :theme="theme" :inline-collapsed="collapsed">
       <template v-for="item in menuData">
         <a-menu-item v-if="!item.children" :key="item.path" @click="() => $router.push({path: item.path, query: $router.query})">
@@ -122,4 +122,15 @@ export default {
 }
 </script>
 <style lang="scss">
+.logo {
+  text-shadow: 2px 2px 10px 5px #1890ff;
+  box-shadow: 0 0 10px 10px #1890ff inset;
+  margin: 16px;
+  height: 32px;
+  line-height: 32px;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  border-radius: 6px;
+  // background: rgba(255, 255, 255, 0.2);
+}
 </style>

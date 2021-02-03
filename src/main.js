@@ -32,7 +32,6 @@ const i18nOption = {
     enUS
   }
 }
-console.log(i18nOption)
 const i18n = new VueI18n(i18nOption)
 
 // 当运行serve:mock的时候执行
