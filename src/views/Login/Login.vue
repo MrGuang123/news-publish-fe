@@ -79,10 +79,28 @@ export default {
       registRules,
     }
   },
+  created() {
+    document.onkeyup = event => {
+      if (event.keyCode === 13 || event.which === 13) {
+        this.login()
+      }
+    }
+  },
   methods: {
     async login() {
-      const result = await this.$store.dispatch('user/LOGIN', this.loginForm)
-      console.log('login', result, this.loginForm)
+      const { userName, password } = this.loginForm
+      if (!userName || !password) {
+        return this.$notification.error({
+          message: '用户名或者密码缺失',
+          description: '请将用户名和密码填写完整后再次尝试登陆！',
+        })
+      }
+      try {
+        await this.$store.dispatch('USER/LOGIN', this.loginForm)
+        this.$router.push('/')
+      } catch (e) {
+        console.log(e)
+      }
     },
     createUser() {},
   },

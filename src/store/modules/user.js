@@ -1,6 +1,8 @@
 import * as types from '../type'
 import methods from '../../apis/methods'
 
+const { login } = methods
+
 export default {
   namespaced: true,
   state() {
@@ -10,8 +12,12 @@ export default {
     }
   },
   mutations: {
-    [types.LOGIN](state, status) {
-      state.status = state.status + status
+    [types.LOGIN](state, userData) {
+      state.userInfo = userData
+      state.token = userData.token
+
+      localStorage.setItem('userInfo', JSON.stringify(userData))
+      localStorage.setItem('token', userData.token)
     },
     [types.LOGOUT](state, status) {
       state.status = status
@@ -19,10 +25,13 @@ export default {
   },
   actions: {
     async [types.LOGIN]({ commit }, userInfo) {
-      console.log('vuex', methods)
-      // const result = await login(userInfo)
-      // console.log(result)
-        commit(types.LOGIN, userInfo)
+      try {
+        const { data } = await login(userInfo)
+        
+        commit(types.LOGIN, data)
+      }catch(e) {
+        console.log(e)
+      }
     },
     async [types.LOGOUT]({ commit }, userInfo) {
       // await logout(userInfo)

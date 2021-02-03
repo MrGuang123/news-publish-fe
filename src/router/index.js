@@ -80,7 +80,23 @@ router.beforeEach((to, from, next) => {
   if (to.path !== from.path) {
     NProgress.start()
   }
-  next()
+
+  const token = localStorage.getItem('token')
+  // 如果有token，要去登录页会转到首页，要去其它页面直接放行
+  // 如果没有token，要去登录页放行，要去其它页面会转到登录页
+  if(token) {
+    if(to.path === '/login') {
+      next('/')
+    }else {
+      next()
+    }
+  }else {
+    if(to.path === '/login') {
+      next()
+    }else {
+      next('/login')
+    }
+  }
 })
 
 router.afterEach(() => {

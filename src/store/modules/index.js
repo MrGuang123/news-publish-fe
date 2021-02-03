@@ -1,7 +1,7 @@
-import user from './user'
-import list from './list'
+import USER from './user'
+import LIST from './list'
 
 export default {
-  user,
-  list
+  USER,
+  LIST
 }
