@@ -38,6 +38,7 @@ const i18n = new VueI18n(i18nOption)
 process.env.VUE_APP_MOCK && require('../Mock')
 
 Vue.config.productionTip = false;
+// Vue.prototype.$message = message
 
 new Vue({
   i18n,

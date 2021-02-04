@@ -1,11 +1,12 @@
 import axios from 'axios'
 import { message } from 'ant-design-vue';
+import router from "../router";
 
 let baseUrl = process.env.NODE_ENV === 'production' ? '' : ''
 // let loading = null
 
 const instance = axios.create({
-  timeout: 6000,
+  timeout: 15000,
   baseURL: baseUrl,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8'
@@ -18,18 +19,28 @@ instance.interceptors.request.use(config => {
   if(token) {
     config.headers.authorization = `Bearer ${token}`
   }
-  
+
   return config
 })
 
-instance.interceptors.response.use(data => {
+instance.interceptors.response.use(response => {
   // TODO: 关闭loading
-  console.log('responseData', data)
-  return data
+  const { data } = response
+  if(data.code === 403) {
+    message.error('权限失效，请重新登录')
+    localStorage.removeItem('token')
+    localStorage.removeItem('userInfo')
+    router.push('/login')
+    return Promise.reject(new Error('权限失效'))
+  }else if(data.code >= 300) {
+    message.error(data.msg || '请求出错')
+    return Promise.reject(new Error(data.msg || '请求出错'))
+  }else {
+    return data
+  }
 }, error => {
-  // TODO: 错误处理
-  // TODO: 错误提示
   // TODO: 关闭loading
+  message.error(error.message)
   return Promise.reject(error)
 })
 
@@ -45,10 +56,10 @@ export const aGet = (url, params = {}) => {
       url,
       params
     }).then(res => {
-      resolve(res.data)
+      resolve(res)
     }).catch(err => {
-      message.error(err.message)
-      reject(err.data)
+      // message.error(err.message)
+      reject(err)
     })
   })
 }
@@ -60,9 +71,9 @@ export const aPost = (url, data) => {
       url,
       data
     }).then(res => {
-      resolve(res.data)
+      resolve(res)
     }).catch(err => {
-      reject(err.data)
+      reject(err)
     })
   })
 }
@@ -82,9 +93,9 @@ export const aPut = (url, data) => {
       url,
       data
     }).then(res => {
-      resolve(res.data)
+      resolve(res)
     }).catch(err => {
-      reject(err.data)
+      reject(err)
     })
   })
 }
@@ -103,9 +114,9 @@ export const aDelete = (url, params) => {
       url,
       params
     }).then(res => {
-      resolve(res.data)
+      resolve(res)
     }).catch(err => {
-      reject(err.data)
+      reject(err)
     })
   })
 }

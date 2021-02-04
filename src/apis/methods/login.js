@@ -8,8 +8,3 @@ export const login = (data) => {
 export const logout = (params) => {
   return aGet(urls.logout, params)
 }
-
-// export default {
-//   login,
-//   logout
-// }

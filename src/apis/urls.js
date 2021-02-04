@@ -31,9 +31,17 @@ const userManage = {
   userUrl: `${baseUrl}/users`
 }
 
+/**
+ * 标签管理
+ */
+const LabelManage = {
+  labelUrl: `${baseUrl}/labels`
+}
+
 export default {
   ...loginUrl,
   ...homeURLs,
   ...newsManage,
-  ...userManage
+  ...userManage,
+  ...LabelManage
 }
