@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="set-theme">
+    <!-- <div class="set-theme">
       <icon-font type="icontubiao_ditu"></icon-font>
       <a-dropdown>
         <a-menu slot="overlay" @click="changeTheme" :selected-keys="selectedKey">
@@ -13,7 +13,7 @@
           <a-icon type="down" />
         </a-button>
       </a-dropdown>
-    </div>
+    </div> -->
     <div class="set-locale">
       <a-dropdown>
         <!-- <a class="ant-dropdown-link" @click="e => e.preventDefault()">语言切换</a> -->
@@ -24,7 +24,17 @@
         <a-button class="btn-trigger">语言切换</a-button>
       </a-dropdown>
     </div>
-    <div class="user">用户头像</div>
+    <div class="user">
+      <a-dropdown>
+        <a-menu slot="overlay" @click="userHandler">
+          <a-menu-item key="logout">退出登录</a-menu-item>
+        </a-menu>
+        <a-button class="btn-trigger user-handler">
+          <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+          {{userName}}
+        </a-button>
+      </a-dropdown>
+    </div>
   </div>
 </template>
 <script>
@@ -47,6 +57,12 @@ export default {
       selectedKey: ['dark'],
     }
   },
+  computed: {
+    userName() {
+      const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+      return userInfo.userName
+    },
+  },
   methods: {
     changeTheme({ key }) {
       console.log(key)
@@ -61,6 +77,9 @@ export default {
       })
       this.$i18n.locale = key
     },
+    userHandler({ key }) {
+      console.log(key)
+    },
   },
 }
 </script>
@@ -74,7 +93,13 @@ export default {
     margin-right: 20px;
   }
   .btn-trigger {
-    margin-left: 6px;
+    margin-left: 16px;
+  }
+  .user-handler {
+    border: none;
+    box-shadow: 2px 2px 6px rgba(24, 14, 255, 0.6);
+    border-radius: 6px;
+    min-width: 116px;
   }
 }
 </style>

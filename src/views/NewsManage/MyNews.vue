@@ -23,61 +23,23 @@
           </template>
         </a-table-column>
       </a-table>
-      <!-- <a-table :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }" :data-source="data">
-        <a-table-column key="name"></a-table-column>
-      </a-table> -->
       <a-pagination class="pagination" show-quick-jumper :current="pageInfo.pageIndex" :pageSize="pageInfo.pageSize" :total="pageInfo.total" @change="onChange" />
     </div>
   </div>
 </template>
 
 <script>
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-  },
-]
-
-const data = []
-for (let i = 0; i < 46; i++) {
-  data.push({
-    title: 'test1',
-    author: 'tom',
-    publishTime: '2021-1-1',
-    readCount: 20,
-    key: i,
-  })
-}
 export default {
   name: 'MyNews',
   data() {
     return {
       searchValue: '',
-      data,
-      columns,
+      data: [],
       selectedRowKeys: [],
-      // data: [
-      //   {
-      //     title: 'test1',
-      //     author: 'tom',
-      //     publishTime: '2021-1-1',
-      //     readCount: 20,
-      //     key: 1,
-      //   },
-      // ],
       pageInfo: {
         pageIndex: 1,
         pageSize: 10,
-        total: 500,
+        total: 0,
       },
     }
   },
