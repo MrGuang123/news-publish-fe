@@ -1,4 +1,8 @@
 export default {
+  title: 'News Publish System',
+  home: {
+    des: 'Introduction to our website'
+  },
   route: {
     loginPage: 'LoginPage',
     home: 'Home',

@@ -1,6 +1,6 @@
 <template>
   <a-layout-sider :trigger="null" v-model="collapsed" collapsible>
-    <div class="logo">新闻发布系统</div>
+    <div class="logo">{{$t('title')}}</div>
     <a-menu :selected-keys="selectedKeys" :open-keys.sync="openKeys" mode="inline" :theme="theme" :inline-collapsed="collapsed">
       <template v-for="item in menuData">
         <a-menu-item v-if="!item.children" :key="item.path" @click="() => $router.push({path: item.path, query: $router.query})">

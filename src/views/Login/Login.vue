@@ -1,5 +1,8 @@
 <template>
   <div class="login-wrap">
+    <!-- <div class="main-title"> -->
+    <h1 class="main-title" data-heading="新闻发布系统">新闻发布系统</h1>
+    <!-- </div> -->
     <div class="form-tabs">
       <a-tabs>
         <a-tab-pane key="1" tab="登录">
@@ -109,6 +112,47 @@ export default {
 
 <style lang="scss" scoped>
 .login-wrap {
+  .main-title {
+    font-family: 'Source Code Pro', monospace;
+    text-transform: uppercase;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    width: 39px;
+    position: absolute;
+    top: 50%;
+    left: 16%;
+    margin: 0;
+    text-rendering: optimizeLegibility;
+    font-weight: 900;
+    color: #666;
+    text-shadow: 1px 4px 6px #e6e2df, 0 0 0 #66303a, 1px 4px 6px #e6e2df;
+    transform-style: preserve-3d;
+    perspective: 1000;
+    &:hover:before {
+      transform: rotateY(-45deg);
+    }
+    padding: 6px;
+    box-sizing: content-box;
+    border-radius: 6px;
+    box-shadow: 2px 2px 10px 0 #fff, 2px 2px 10px 0 #fff inset;
+  }
+  .main-title:before {
+    content: attr(data-heading);
+    transition: all 0.6s;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    color: #fbf7f4;
+    transform-origin: left center;
+    transform: rotateY(-30deg);
+    z-index: 2;
+    padding: 6px;
+    box-sizing: content-box;
+    text-shadow: 2px -1px 6px rgba(0, 0, 0, 0.2);
+  }
   min-height: 100%;
   background-image: url('../../assets/images/bg.png');
   background-position: center;
