@@ -21,7 +21,8 @@ const homeURLs = {
  * 新闻管理
  */ 
 const newsManage = {
-  newsList: `${baseUrl}/news/newsList`,
+  newsList: `${baseUrl}/news`,
+  uploadImage: `${baseUrl}/upload-image`
 }
 
 /**

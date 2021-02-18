@@ -47,6 +47,10 @@
 <script>
 import wangEditor from 'wangeditor'
 import { geoMap } from '../../assets/js/geoMap'
+import urls from '../../apis/urls'
+
+const { uploadImage } = urls
+
 export default {
   name: 'NewsDetail',
   data() {
@@ -80,6 +84,7 @@ export default {
   },
   mounted() {
     this.initEditor()
+    console.log(uploadImage)
   },
   methods: {
     initEditor() {
@@ -109,6 +114,18 @@ export default {
         'undo', // 撤销
         'redo', // 重复
       ]
+      // 设置图片上传地址
+      this.editor.config.uploadImgServer = uploadImage
+      // 设置图片允许上传的类型
+      this.editor.config.uploadImgAccept = ['jpg', 'jpeg', 'png', 'gif']
+      // 设置请求头
+      const token = localStorage.getItem('token')
+      // 请求头添加token
+      this.editor.config.uploadImgHeaders = {
+        authorization: `Bearer ${token}`,
+      }
+      // 定义文件的名称
+      this.editor.config.uploadFileName = 'imageFile'
       this.editor.create()
     },
     getEditorData() {

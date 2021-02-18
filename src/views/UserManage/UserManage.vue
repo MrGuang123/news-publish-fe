@@ -6,7 +6,7 @@
       <a-button type="primary" @click="createUser" style="float:right;">新建用户</a-button>
     </div>
     <div class="search-content">
-      <a-table :data-source="newsList" :pagination="false">
+      <a-table :data-source="newsList" rowKey="id" :pagination="false">
         <a-table-column key="userName" title="用户名称" data-index="userName" />
         <a-table-column key="rolesName" title="角色类别" data-index="rolesName" />
         <a-table-column key="createdAt" title="创建日期" data-index="createdAt" />
