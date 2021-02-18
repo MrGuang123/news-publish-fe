@@ -26,7 +26,7 @@
             </a-form-item>
           </a-form>
         </a-tab-pane>
-        <a-tab-pane key="2" tab="注册">
+        <!-- <a-tab-pane key="2" tab="注册">
           <a-form ref="registForm" layout="horizontal" :model="registForm" :rules="registRules" :label-col="labelCol" :wrapper-col="wrapperCol">
             <a-form-item label="用户名" name="userName">
               <a-input v-model="registForm.userName" />
@@ -54,7 +54,7 @@
               <a-button disabled class="submit-btn" type="primary" @click="createUser">注册</a-button>
             </a-form-item>
           </a-form>
-        </a-tab-pane>
+        </a-tab-pane> -->
       </a-tabs>
     </div>
   </div>
@@ -179,11 +179,20 @@ export default {
         text-align: center;
       }
     }
-    ::v-deep(.ant-input) {
+    ::v-deep .ant-input {
       background: rgba(255, 255, 255, 0.6);
     }
-    ::v-deep(.ant-input-group-addon) {
+    ::v-deep .ant-input-group-addon {
       background: transparent;
+    }
+    ::v-deep .ant-tabs-ink-bar,
+    ::v-deep .ant-tabs-tab,
+    ::v-deep .ant-tabs-nav {
+      width: 100% !important;
+    }
+    ::v-deep .ant-tabs-tab {
+      text-align: center !important;
+      font-size: 18px;
     }
 
     .submit-btn {
