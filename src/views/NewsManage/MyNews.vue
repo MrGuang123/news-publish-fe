@@ -10,16 +10,21 @@
         <a-button type="primary" ghost shape="round" @click="download">下载新闻</a-button>
         <a-button type="primary" shape="round" @click="download('all')">全部下载</a-button>
       </div>
-      <a-table :row-selection="rowSelection()" :data-source="data" :pagination="false">
-        <a-table-column key="title" title="新闻标题" data-index="title" />
-        <a-table-column key="author" title="作者" data-index="author" />
-        <a-table-column key="publishTime" title="发布时间" data-index="publishTime"></a-table-column>
+      <a-table :row-selection="rowSelection()" rowKey="id" :data-source="newsList" :pagination="false">
+        <a-table-column key="newsTitle" title="新闻标题" data-index="newsTitle" />
+        <a-table-column key="user.creatorName" title="作者" data-index="user.creatorName" />
+        <a-table-column key="updatedAt" title="发布时间" data-index="updatedAt"></a-table-column>
         <a-table-column key="readCount" title="阅读数" data-index="readCount" width="100px"></a-table-column>
+        <a-table-column key="isPublished" title="状态" width="100px">
+          <template slot-scope="{ isPublished }">
+            <span>{{ isPublished ? '已发布' : '暂存' }}</span>
+          </template>
+        </a-table-column>
         <a-table-column key="action" title="操作" align="center" width="200px">
-          <template slot-scope="record">
-            <span class="list-action" @click="findDetail(record)">查看</span>
-            <span class="list-action" @click="editNews(record)">编辑</span>
-            <span class="list-action" @click="deleteNews(record)">删除</span>
+          <template slot-scope="{ id }">
+            <span class="list-action" @click="findDetail(id)">查看</span>
+            <span class="list-action" @click="editNews(id)">编辑</span>
+            <span class="list-action" @click="deleteNews(id)">删除</span>
           </template>
         </a-table-column>
       </a-table>
@@ -29,12 +34,14 @@
 </template>
 
 <script>
+import { getNewsList } from '@/apis/methods'
+
 export default {
   name: 'MyNews',
   data() {
     return {
       searchValue: '',
-      data: [],
+      newsList: [],
       selectedRowKeys: [],
       pageInfo: {
         pageIndex: 1,
@@ -45,10 +52,26 @@ export default {
   },
   computed: {},
   mounted() {
-    console.log(this.$route)
+    this.getNewsList()
   },
   methods: {
-    onSearch() {},
+    async getNewsList() {
+      let params = {
+        pageIndex: this.pageInfo.pageIndex,
+        pageSize: this.pageInfo.pageSize,
+      }
+      if (this.searchValue) {
+        params = Object.assign(params, {
+          newsTitle: this.searchValue,
+        })
+      }
+      const { data } = await getNewsList(params)
+      this.newsList = data
+      console.log(data)
+    },
+    onSearch() {
+      this.getNewsList()
+    },
     createNews() {
       this.$router.push({
         path: '/news-manage/create-news',
