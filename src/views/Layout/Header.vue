@@ -84,7 +84,6 @@ export default {
       //   },
       // })
       this.changeLanguage(key)
-      console.log(this.locale)
       this.$i18n.locale = key
     },
     userHandler({ key }) {
