@@ -1,5 +1,8 @@
 <template>
-  <div class="line-chart"></div>
+  <div>
+    <h4 class="chart-title">{{ $t('newsAnalysisChart.week') }}</h4>
+    <div class="line-chart"></div>
+  </div>
 </template>
 
 <script>
@@ -26,15 +29,15 @@ export default {
     )
     this.options = {
       backgroundColor: '#fff',
-      title: {
-        text: '近一周新闻发布总量',
-        textStyle: {
-          fontSize: 16,
-          fontWeight: 400,
-        },
-        left: '5%',
-        top: '5%',
-      },
+      // title: {
+      //   text: '近一周新闻发布总量',
+      //   textStyle: {
+      //     fontSize: 16,
+      //     fontWeight: 400,
+      //   },
+      //   left: '50',
+      //   top: '5%',
+      // },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -193,6 +196,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.chart-title {
+  font-size: 16px;
+  margin-bottom: 16px;
+  padding-left: 32px;
+  color: #1890ff;
+}
 .line-chart {
   width: 100%;
   height: 360px;

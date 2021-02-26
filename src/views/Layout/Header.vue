@@ -17,11 +17,11 @@
     <div class="set-locale">
       <a-dropdown>
         <!-- <a class="ant-dropdown-link" @click="e => e.preventDefault()">语言切换</a> -->
-        <a-menu slot="overlay" @click="changeLocale" :selectedKeys="[$route.query.locale || 'zhCN']">
+        <a-menu slot="overlay" @click="changeLocale" :selectedKeys="locale">
           <a-menu-item key="zhCN">简体中文</a-menu-item>
           <a-menu-item key="enUS">English</a-menu-item>
         </a-menu>
-        <a-button class="btn-trigger">语言切换</a-button>
+        <a-button class="btn-trigger">{{ $t('exchangeLanguage') }}</a-button>
       </a-dropdown>
     </div>
     <div class="user">
@@ -38,6 +38,8 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: 'Header',
   data() {
@@ -62,19 +64,27 @@ export default {
       const userInfo = JSON.parse(localStorage.getItem('userInfo'))
       return userInfo.userName
     },
+    ...mapGetters({
+      locale: 'LANGUAGE/locale',
+    }),
   },
   methods: {
+    ...mapMutations('LANGUAGE', {
+      changeLanguage: 'CHANGELANGUAGE',
+    }),
     changeTheme({ key }) {
       console.log(key)
       this.selectedKey[0] = key
     },
     changeLocale({ key }) {
-      this.$router.push({
-        query: {
-          ...this.$route.query,
-          locale: key,
-        },
-      })
+      // this.$router.push({
+      //   query: {
+      //     ...this.$route.query,
+      //     locale: key,
+      //   },
+      // })
+      this.changeLanguage(key)
+      console.log(this.locale)
       this.$i18n.locale = key
     },
     userHandler({ key }) {

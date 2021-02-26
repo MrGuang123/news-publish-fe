@@ -1,21 +1,21 @@
 <template>
   <div class="label-manage">
     <div class="label-header">
-      <h3 class="list-title">标签列表</h3>
-      <a-input-search class="list-search" v-model="searchValue" placeholder="请输入标签名称" enter-button="搜索" @search="onSearch" />
-      <a-button type="primary" @click="createUser" style="float:right;">新建标签</a-button>
+      <h3 class="list-title">{{ $t('labelList.title') }}</h3>
+      <a-input-search class="list-search" v-model="searchValue" :placeholder="$t('labelList.placeholder')" :enter-button="$t('labelList.searchBtn')" @search="onSearch" />
+      <a-button type="primary" @click="createUser" style="float:right;">{{ $t('labelList.create') }}</a-button>
     </div>
     <div class="search-content">
       <a-table :data-source="labelList" rowKey="id" :pagination="false">
-        <a-table-column key="labelName" title="标签名称" data-index="labelName" />
-        <a-table-column key="labelDes" title="标签描述" data-index="labelDes" />
-        <a-table-column key="creatorName" title="创建人" data-index="creatorName"></a-table-column>
-        <a-table-column key="updatedAt" title="更新时间" data-index="updatedAt" width="200px"></a-table-column>
-        <a-table-column key="action" title="操作" align="center" width="240px">
+        <a-table-column key="labelName" :title="$t('labelList.labelName')" data-index="labelName" />
+        <a-table-column key="labelDes" :title="$t('labelList.labelDes')" data-index="labelDes" />
+        <a-table-column key="creatorName" :title="$t('labelList.creator')" data-index="creatorName"></a-table-column>
+        <a-table-column key="updatedAt" :title="$t('labelList.updatedDate')" data-index="updatedAt" width="200px"></a-table-column>
+        <a-table-column key="action" :title="$t('labelList.action')" align="center" width="240px">
           <template #default="{ id }">
-            <span class="list-action" @click="findDetail(id)">查看</span>
-            <span class="list-action" @click="editLabel(id)">编辑</span>
-            <span class="list-action" @click="deleteLabel(id)">删除</span>
+            <span class="list-action" @click="findDetail(id)">{{ $t('labelList.view') }}</span>
+            <span class="list-action" @click="editLabel(id)">{{ $t('labelList.edit') }}</span>
+            <span class="list-action" @click="deleteLabel(id)">{{ $t('labelList.delete') }}</span>
           </template>
         </a-table-column>
       </a-table>
@@ -23,11 +23,11 @@
     </div>
     <a-modal :title="modalTitle" :visible="visible" :confirm-loading="confirmLoading" @ok="submitLabel" @cancel="cancel">
       <a-form layout="horizontal">
-        <a-form-item label="标签名称：">
-          <a-input :disabled="disabled" v-model="labelName" placeholder="请输入标签名称" />
+        <a-form-item :label="$t('labelList.labelName') + '：'">
+          <a-input :disabled="disabled" v-model="labelName" :placeholder="$t('labelList.pLabelName')" />
         </a-form-item>
-        <a-form-item label="标签描述：">
-          <a-textarea :disabled="disabled" :auto-size="{ minRows: 3, maxRows: 6 }" v-model="labelDes" placeholder="请输入标签描述" />
+        <a-form-item :label="$t('labelList.labelDes') + '：'">
+          <a-textarea :disabled="disabled" :auto-size="{ minRows: 3, maxRows: 6 }" v-model="labelDes" :placeholder="$t('labelList.pLabelDes')" />
         </a-form-item>
       </a-form>
     </a-modal>

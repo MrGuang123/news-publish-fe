@@ -15,7 +15,7 @@
           {{index + 1}} : {{ item }}
         </a-list-item>
         <div slot="header">
-          <h3 class="title">本站介绍</h3>
+          <h3 class="title">{{ $t('home.des') }}</h3>
         </div>
       </a-list>
       <div class="des-control" @click="desControl">
@@ -31,7 +31,7 @@
               <a-icon type="file-word" />
             </div>
             <div class="card-content">
-              <span class="card-title">本站作者</span>
+              <span class="card-title">{{ $t('home.authors') }}</span>
               <span class="card-count">6</span>
             </div>
           </div>
@@ -42,7 +42,7 @@
               <a-icon type="funnel-plot" />
             </div>
             <div class="card-content">
-              <span class="card-title">今日发布新闻量</span>
+              <span class="card-title">{{ $t('home.todayPublishCount') }}</span>
               <span class="card-count">6</span>
             </div>
           </div>
@@ -53,7 +53,7 @@
               <a-icon type="dribbble-circle" theme="filled" />
             </div>
             <div class="card-content">
-              <span class="card-title">总共发布新闻量</span>
+              <span class="card-title">{{ $t('home.allPublishCount') }}</span>
               <span class="card-count">16</span>
             </div>
           </div>
@@ -64,7 +64,7 @@
               <a-icon type="eye" />
             </div>
             <div class="card-content">
-              <span class="card-title">总浏览量</span>
+              <span class="card-title">{{ $t('home.totalViews') }}</span>
               <span class="card-count">166</span>
             </div>
           </div>
@@ -73,7 +73,7 @@
     </section>
     <!-- 最新新闻列表 -->
     <section class="home-list">
-      <h3 class="title"><span>最新新闻</span><span class="more">更多</span></h3>
+      <h3 class="title"><span>{{ $t('home.newNews') }}</span><span class="more">{{ $t('home.more') }}</span></h3>
       <a-list item-layout="horizontal" :data-source="newestNewsList">
         <a-list-item slot="renderItem" slot-scope="item">
           <a-list-item-meta :description="item.content">
@@ -89,7 +89,7 @@
     </section>
     <!-- 热点新闻列表 -->
     <section class="home-list">
-      <h3 class="title"><span>热点新闻</span><span class="more">更多</span></h3>
+      <h3 class="title"><span>{{ $t('home.hotNews') }}</span><span class="more">{{ $t('home.more') }}</span></h3>
       <a-list item-layout="horizontal" :data-source="hotNewsList">
         <a-list-item slot="renderItem" slot-scope="item">
           <a-list-item-meta :description="item.content">
@@ -129,8 +129,8 @@ export default {
   },
   mounted() {
     // console.log('api', api)
-    this.getNewestList()
-    this.getHotNewsList()
+    // this.getNewestList()
+    // this.getHotNewsList()
   },
   methods: {
     async getNewestList() {

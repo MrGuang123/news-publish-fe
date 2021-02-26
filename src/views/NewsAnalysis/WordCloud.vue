@@ -1,5 +1,8 @@
 <template>
-  <div class="word-cloud"></div>
+  <div>
+    <h4 class="chart-title">{{ $t('newsAnalysisChart.newsLabels') }}</h4>
+    <div class="word-cloud"></div>
+  </div>
 </template>
 
 <script>
@@ -18,15 +21,15 @@ export default {
         tooltip: {
           show: true,
         },
-        title: {
-          text: '各标签新闻数量',
-          textStyle: {
-            fontSize: 16,
-            fontWeight: 400,
-          },
-          left: '5%',
-          top: '5%',
-        },
+        // title: {
+        //   text: '各标签新闻数量',
+        //   textStyle: {
+        //     fontSize: 16,
+        //     fontWeight: 400,
+        //   },
+        //   left: '50',
+        //   top: '5%',
+        // },
         series: [
           {
             type: 'wordCloud',
@@ -155,7 +158,13 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.chart-title {
+  font-size: 16px;
+  margin-bottom: 16px;
+  padding-left: 32px;
+  color: #1890ff;
+}
 .word-cloud {
   width: 100%;
   height: 360px;

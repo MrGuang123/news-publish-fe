@@ -1,25 +1,25 @@
 <template>
   <div class="user-manage">
     <div class="user-header">
-      <h3 class="list-title">用户列表</h3>
-      <a-input-search class="list-search" v-model="searchValue" placeholder="请输入用户名称" enter-button="搜索" @search="onSearch" />
-      <a-button type="primary" @click="createUser" style="float:right;">新建用户</a-button>
+      <h3 class="list-title">{{ $t('userList.title') }}</h3>
+      <a-input-search class="list-search" v-model="searchValue" :placeholder="$t('userList.placeholder')" :enter-button="$t('userList.searchBtn')" @search="onSearch" />
+      <a-button type="primary" @click="createUser" style="float:right;">{{ $t('userList.create') }}</a-button>
     </div>
     <div class="search-content">
       <a-table :data-source="newsList" rowKey="id" :pagination="false">
-        <a-table-column key="userName" title="用户名称" data-index="userName" />
-        <a-table-column key="rolesName" title="角色类别" data-index="rolesName" />
-        <a-table-column key="createdAt" title="创建日期" data-index="createdAt" />
-        <a-table-column key="updatedAt" title="更新日期" data-index="updatedAt" />
+        <a-table-column key="userName" :title="$t('userList.userName')" data-index="userName" />
+        <a-table-column key="rolesName" :title="$t('userList.rolesType')" data-index="rolesName" />
+        <a-table-column key="createdAt" :title="$t('userList.createdDate')" data-index="createdAt" />
+        <a-table-column key="updatedAt" :title="$t('userList.updateDate')" data-index="updatedAt" />
         <!-- TODO: 创建人和状态需要后面添加到接口 -->
-        <!-- <a-table-column key="publishTime" title="创建人" data-index="publishTime"></a-table-column>
-        <a-table-column key="readCount" title="状态" data-index="readCount" width="80px"></a-table-column> -->
-        <a-table-column key="action" title="操作" align="center" width="240px">
+        <!-- <a-table-column key="publishTime" :title="创建人" data-index="publishTime"></a-table-column>
+        <a-table-column key="readCount" :title="状态" data-index="readCount" width="80px"></a-table-column> -->
+        <a-table-column key="action" :title="$t('userList.action')" align="center" width="320px">
           <template #default="{ record }">
-            <span class="list-action" @click="findDetail(record)">查看</span>
-            <span class="list-action" @click="editNews(record)">编辑</span>
-            <span class="list-action" @click="deleteNews(record)">删除</span>
-            <span class="list-action" @click="findDetail(record)">密码重置</span>
+            <span class="list-action" @click="findDetail(record)">{{ $t('userList.view') }}</span>
+            <span class="list-action" @click="editNews(record)">{{ $t('userList.edit') }}</span>
+            <span class="list-action" @click="deleteNews(record)">{{ $t('userList.delete') }}</span>
+            <span class="list-action" @click="findDetail(record)">{{ $t('userList.resetPwd') }}</span>
           </template>
         </a-table-column>
       </a-table>

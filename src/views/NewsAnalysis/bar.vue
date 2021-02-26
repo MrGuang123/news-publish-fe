@@ -1,5 +1,8 @@
 <template>
-  <div class="bar-chart"></div>
+  <div>
+    <h4 class="chart-title">{{ $t('newsAnalysisChart.day') }}</h4>
+    <div class="bar-chart"></div>
+  </div>
 </template>
 
 <script>
@@ -132,6 +135,12 @@ export default {
 </script>
 
 <style>
+.chart-title {
+  font-size: 16px;
+  margin-bottom: 16px;
+  padding-left: 32px;
+  color: #1890ff;
+}
 .bar-chart {
   width: 100%;
   height: 360px;

@@ -1,30 +1,30 @@
 <template>
   <div class="my-news">
     <div class="news-header">
-      <h3 class="list-title">我的新闻</h3>
-      <a-input-search class="list-search" v-model="searchValue" placeholder="请输入新闻标题" enter-button="搜索" @search="onSearch" />
+      <h3 class="list-title">{{ $t('myNews.title') }}</h3>
+      <a-input-search class="list-search" v-model="searchValue" :placeholder="$t('myNews.placeholder')" :enter-button="$t('myNews.searchBtn')" @search="onSearch" />
       <a-button type="primary" @click="createNews" style="float:right;">新建新闻</a-button>
     </div>
     <div class="search-content">
       <div class="control-group">
-        <a-button type="primary" ghost shape="round" @click="download">下载新闻</a-button>
-        <a-button type="primary" shape="round" @click="download('all')">全部下载</a-button>
+        <a-button type="primary" ghost shape="round" @click="download">{{ $t('myNews.download') }}</a-button>
+        <a-button type="primary" shape="round" @click="download('all')">{{ $t('myNews.downloadAll') }}</a-button>
       </div>
       <a-table :row-selection="rowSelection()" rowKey="id" :data-source="newsList" :pagination="false">
-        <a-table-column key="newsTitle" title="新闻标题" data-index="newsTitle" />
-        <a-table-column key="user.creatorName" title="作者" data-index="user.creatorName" />
-        <a-table-column key="updatedAt" title="发布时间" data-index="updatedAt"></a-table-column>
-        <a-table-column key="readCount" title="阅读数" data-index="readCount" width="100px"></a-table-column>
-        <a-table-column key="isPublished" title="状态" width="100px">
+        <a-table-column key="newsTitle" :title="$t('myNews.newsTitle')" data-index="newsTitle" />
+        <a-table-column key="user.creatorName" :title="$t('myNews.author')" data-index="user.creatorName" />
+        <a-table-column key="updatedAt" :title="$t('myNews.publishDate')" data-index="updatedAt"></a-table-column>
+        <a-table-column key="readCount" :title="$t('myNews.readCount')" data-index="readCount" width="160px"></a-table-column>
+        <a-table-column key="isPublished" :title="$t('myNews.readCount')" width="160px">
           <template slot-scope="{ isPublished }">
-            <span>{{ isPublished ? '已发布' : '暂存' }}</span>
+            <span>{{ isPublished ? $t('myNews.published') : $t('myNews.storage') }}</span>
           </template>
         </a-table-column>
-        <a-table-column key="action" title="操作" align="center" width="200px">
+        <a-table-column key="action" :title="$t('myNews.action')" align="center" width="200px">
           <template slot-scope="{ id }">
-            <span class="list-action" @click="findDetail(id)">查看</span>
-            <span class="list-action" @click="editNews(id)">编辑</span>
-            <span class="list-action" @click="deleteNews(id)">删除</span>
+            <span class="list-action" @click="findDetail(id)">{{ $t('myNews.view') }}</span>
+            <span class="list-action" @click="editNews(id)">{{ $t('myNews.edit') }}</span>
+            <span class="list-action" @click="deleteNews(id)">{{ $t('myNews.delete') }}</span>
           </template>
         </a-table-column>
       </a-table>
