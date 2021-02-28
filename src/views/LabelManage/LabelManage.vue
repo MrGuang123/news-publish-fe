@@ -2,32 +2,90 @@
   <div class="label-manage">
     <div class="label-header">
       <h3 class="list-title">{{ $t('labelList.title') }}</h3>
-      <a-input-search class="list-search" v-model="searchValue" :placeholder="$t('labelList.placeholder')" :enter-button="$t('labelList.searchBtn')" @search="onSearch" />
-      <a-button type="primary" @click="createUser" style="float:right;">{{ $t('labelList.create') }}</a-button>
+      <a-input-search
+        class="list-search"
+        v-model="searchValue"
+        :placeholder="$t('labelList.placeholder')"
+        :enter-button="$t('labelList.searchBtn')"
+        @search="onSearch"
+      />
+      <a-button type="primary" @click="createUser" style="float: right">{{
+        $t('labelList.create')
+      }}</a-button>
     </div>
     <div class="search-content">
       <a-table :data-source="labelList" rowKey="id" :pagination="false">
-        <a-table-column key="labelName" :title="$t('labelList.labelName')" data-index="labelName" />
-        <a-table-column key="labelDes" :title="$t('labelList.labelDes')" data-index="labelDes" />
-        <a-table-column key="creatorName" :title="$t('labelList.creator')" data-index="creatorName"></a-table-column>
-        <a-table-column key="updatedAt" :title="$t('labelList.updatedDate')" data-index="updatedAt" width="200px"></a-table-column>
-        <a-table-column key="action" :title="$t('labelList.action')" align="center" width="240px">
+        <a-table-column
+          key="labelName"
+          :title="$t('labelList.labelName')"
+          data-index="labelName"
+        />
+        <a-table-column
+          key="labelDes"
+          :title="$t('labelList.labelDes')"
+          data-index="labelDes"
+        />
+        <a-table-column
+          key="creatorName"
+          :title="$t('labelList.creator')"
+          data-index="creatorName"
+        ></a-table-column>
+        <a-table-column
+          key="updatedAt"
+          :title="$t('labelList.updatedDate')"
+          data-index="updatedAt"
+          width="200px"
+        ></a-table-column>
+        <a-table-column
+          key="action"
+          :title="$t('labelList.action')"
+          align="center"
+          width="240px"
+        >
           <template #default="{ id }">
-            <span class="list-action" @click="findDetail(id)">{{ $t('labelList.view') }}</span>
-            <span class="list-action" @click="editLabel(id)">{{ $t('labelList.edit') }}</span>
-            <span class="list-action" @click="deleteLabel(id)">{{ $t('labelList.delete') }}</span>
+            <span class="list-action" @click="findDetail(id)">{{
+              $t('labelList.view')
+            }}</span>
+            <span class="list-action" @click="editLabel(id)">{{
+              $t('labelList.edit')
+            }}</span>
+            <span class="list-action" @click="deleteLabel(id)">{{
+              $t('labelList.delete')
+            }}</span>
           </template>
         </a-table-column>
       </a-table>
-      <a-pagination class="pagination" show-quick-jumper :current="pageInfo.pageIndex" :pageSize="pageInfo.pageSize" :total="pageInfo.total" @change="onChange" />
+      <a-pagination
+        class="pagination"
+        show-quick-jumper
+        :current="pageInfo.pageIndex"
+        :pageSize="pageInfo.pageSize"
+        :total="pageInfo.total"
+        @change="onChange"
+      />
     </div>
-    <a-modal :title="modalTitle" :visible="visible" :confirm-loading="confirmLoading" @ok="submitLabel" @cancel="cancel">
+    <a-modal
+      :title="modalTitle"
+      :visible="visible"
+      :confirm-loading="confirmLoading"
+      @ok="submitLabel"
+      @cancel="cancel"
+    >
       <a-form layout="horizontal">
         <a-form-item :label="$t('labelList.labelName') + '：'">
-          <a-input :disabled="disabled" v-model="labelName" :placeholder="$t('labelList.pLabelName')" />
+          <a-input
+            :disabled="disabled"
+            v-model="labelName"
+            :placeholder="$t('labelList.pLabelName')"
+          />
         </a-form-item>
         <a-form-item :label="$t('labelList.labelDes') + '：'">
-          <a-textarea :disabled="disabled" :auto-size="{ minRows: 3, maxRows: 6 }" v-model="labelDes" :placeholder="$t('labelList.pLabelDes')" />
+          <a-textarea
+            :disabled="disabled"
+            :auto-size="{ minRows: 3, maxRows: 6 }"
+            v-model="labelDes"
+            :placeholder="$t('labelList.pLabelDes')"
+          />
         </a-form-item>
       </a-form>
     </a-modal>
