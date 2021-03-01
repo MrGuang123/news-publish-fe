@@ -10,8 +10,7 @@
         <a-table-column key="userName" :title="$t('userList.userName')" data-index="userName" />
         <a-table-column key="rolesName" :title="$t('userList.rolesType')" data-index="rolesName" />
         <a-table-column key="createdAt" :title="$t('userList.createdDate')" data-index="createdAt" />
-        <a-table-column key="updatedAt" :title="$t('userList.updateDate')" data-index="updatedAt" />
-        <!-- TODO: 创建人和状态需要后面添加到接口 -->
+        <a-table-column key="updatedAt" :title="$t('userList.updatedDate')" data-index="updatedAt" />
         <!-- <a-table-column key="publishTime" :title="创建人" data-index="publishTime"></a-table-column>
         <a-table-column key="readCount" :title="状态" data-index="readCount" width="80px"></a-table-column> -->
         <a-table-column key="action" :title="$t('userList.action')" align="center" width="320px">
@@ -53,7 +52,15 @@ export default {
   },
   methods: {
     async getUserList() {
-      const result = await getUserList()
+      const params = {
+        pageIndex: this.pageInfo.pageIndex,
+        pageSize: this.pageInfo.pageSize,
+      }
+      if (this.searchValue) {
+        params.userName = this.searchValue
+      }
+
+      const result = await getUserList(params)
       const { data } = result
       if (data && data.length > 0) {
         data.forEach(item => {
@@ -68,7 +75,9 @@ export default {
       let rolesName = roles.map(roleId => this.roles[roleId])
       return rolesName.join(',')
     },
-    onSearch() {},
+    onSearch() {
+      this.getUserList()
+    },
     createUser() {},
     findDetail(record) {
       console.log(record)

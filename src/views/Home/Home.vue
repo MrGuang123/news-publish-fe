@@ -73,7 +73,7 @@
     </section>
     <!-- 最新新闻列表 -->
     <section class="home-list">
-      <h3 class="title"><span>{{ $t('home.newNews') }}</span><span class="more">{{ $t('home.more') }}</span></h3>
+      <h3 class="title"><span>{{ $t('home.newNews') }}</span><span class="more" @click="goToList">{{ $t('home.more') }}</span></h3>
       <a-list item-layout="horizontal" :data-source="newestNewsList">
         <a-list-item slot="renderItem" slot-scope="item">
           <a-list-item-meta :description="item.summary">
@@ -90,7 +90,7 @@
     </section>
     <!-- 热点新闻列表 -->
     <section class="home-list">
-      <h3 class="title"><span>{{ $t('home.hotNews') }}</span><span class="more">{{ $t('home.more') }}</span></h3>
+      <h3 class="title"><span>{{ $t('home.hotNews') }}</span><span class="more" @click="goToList">{{ $t('home.more') }}</span></h3>
       <a-list item-layout="horizontal" :data-source="hotNewsList">
         <a-list-item slot="renderItem" slot-scope="item">
           <a-list-item-meta :description="item.summary">
@@ -144,6 +144,9 @@ export default {
     this.getShowData()
   },
   methods: {
+    goToList() {
+      this.$router.push('/news-manage/news-list')
+    },
     async getShowData() {
       const { data } = await getShowData()
       this.showDataMap = data
@@ -300,6 +303,7 @@ export default {
         background: #1890ff;
         color: #fff;
         border-radius: 6px;
+        cursor: pointer;
       }
     }
   }
