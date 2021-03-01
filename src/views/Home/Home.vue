@@ -32,7 +32,7 @@
             </div>
             <div class="card-content">
               <span class="card-title">{{ $t('home.authors') }}</span>
-              <span class="card-count">6</span>
+              <span class="card-count">{{showDataMap.authorsNum}}</span>
             </div>
           </div>
         </a-col>
@@ -43,7 +43,7 @@
             </div>
             <div class="card-content">
               <span class="card-title">{{ $t('home.todayPublishCount') }}</span>
-              <span class="card-count">6</span>
+              <span class="card-count">{{showDataMap.todayNews}}</span>
             </div>
           </div>
         </a-col>
@@ -54,7 +54,7 @@
             </div>
             <div class="card-content">
               <span class="card-title">{{ $t('home.allPublishCount') }}</span>
-              <span class="card-count">16</span>
+              <span class="card-count">{{showDataMap.allNewsNum}}</span>
             </div>
           </div>
         </a-col>
@@ -65,7 +65,7 @@
             </div>
             <div class="card-content">
               <span class="card-title">{{ $t('home.totalViews') }}</span>
-              <span class="card-count">166</span>
+              <span class="card-count">{{showDataMap.allReadCount}}</span>
             </div>
           </div>
         </a-col>
@@ -76,12 +76,13 @@
       <h3 class="title"><span>{{ $t('home.newNews') }}</span><span class="more">{{ $t('home.more') }}</span></h3>
       <a-list item-layout="horizontal" :data-source="newestNewsList">
         <a-list-item slot="renderItem" slot-scope="item">
-          <a-list-item-meta :description="item.content">
+          <a-list-item-meta :description="item.summary">
             <template #title>
-              <a href="https://www.antdv.com/">{{ item.title }}</a>
+              <a href="https://www.antdv.com/">{{ item.newsTitle }}</a>
+              <span>更新于：{{ item.updatedAt }}</span>
             </template>
             <template #avatar>
-              <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+              <a-avatar :src="newsAvatar" />
             </template>
           </a-list-item-meta>
         </a-list-item>
@@ -92,12 +93,13 @@
       <h3 class="title"><span>{{ $t('home.hotNews') }}</span><span class="more">{{ $t('home.more') }}</span></h3>
       <a-list item-layout="horizontal" :data-source="hotNewsList">
         <a-list-item slot="renderItem" slot-scope="item">
-          <a-list-item-meta :description="item.content">
+          <a-list-item-meta :description="item.summary">
             <template #title>
-              <a href="https://www.antdv.com/">{{ item.title }}</a>
+              <a href="https://www.antdv.com/">{{ item.newsTitle }}</a>
+              <span>阅读数：{{ item.readCount }}</span>
             </template>
             <template #avatar>
-              <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+              <a-avatar :src="newsAvatar" />
             </template>
           </a-list-item-meta>
         </a-list-item>
@@ -106,12 +108,19 @@
   </div>
 </template>
 <script>
-import api from '../../apis/methods'
+import { getShowData, getNewestList, getHotNewsList } from '../../apis/methods'
+import newsAvatar from '../../assets/images/news-avatar.jpg'
 
 export default {
   name: 'Home',
   data() {
     return {
+      showDataMap: {
+        authorsNum: 0,
+        todayNews: 0,
+        allNewsNum: 0,
+        allReadCount: 0,
+      },
       newestNewsList: [],
       hotNewsList: [],
       isShrink: true,
@@ -125,24 +134,28 @@ export default {
         '目前标题、导航菜单、Logo、按钮支持中文和英文切换',
         '新闻上传支持文字、表情和图片',
       ],
+      newsAvatar,
     }
   },
   mounted() {
     // console.log('api', api)
-    // this.getNewestList()
-    // this.getHotNewsList()
+    this.getNewestList()
+    this.getHotNewsList()
+    this.getShowData()
   },
   methods: {
+    async getShowData() {
+      const { data } = await getShowData()
+      this.showDataMap = data
+    },
     async getNewestList() {
-      const { getNewestList } = api
       let { data } = await getNewestList()
-      this.newestNewsList = data.data
+      this.newestNewsList = data
       console.log('result', data)
     },
     async getHotNewsList() {
-      const { getHotNewsList } = api
       let { data } = await getHotNewsList()
-      this.hotNewsList = data.data
+      this.hotNewsList = data
       console.log('result', data)
     },
     desControl() {
@@ -267,6 +280,13 @@ export default {
   }
   .home-list {
     @extend .panel-common;
+    ::v-deep .ant-list-item-meta-title {
+      display: flex;
+      justify-content: space-between;
+      span {
+        color: #1890ff;
+      }
+    }
     .title {
       font-size: 18px;
       padding-left: 16px;

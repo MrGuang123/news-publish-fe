@@ -13,8 +13,9 @@ const loginUrl = {
  * 首页
  */
 const homeURLs = {
-  newestNewsList: `${baseUrl}/home/newestNewsList`,
-  hotNewsList: `${baseUrl}/home/hotNewsList`,
+  showData: `${baseUrl}/show-data`,
+  newestNewsList: `${baseUrl}/newest-news`,
+  hotNewsList: `${baseUrl}/hot-news`,
 }
 
 /**
