@@ -1,28 +1,42 @@
 <template>
-  <div class="login-wrap">
+  <div class="login-wrap" ref="loginWrap">
     <!-- <div class="main-title"> -->
     <h1 class="main-title" data-heading="新闻发布系统">新闻发布系统</h1>
     <!-- </div> -->
     <div class="form-tabs">
       <a-tabs>
         <a-tab-pane key="1" tab="登录">
-          <a-form ref="loginForm" layout="horizontal" :hideRequiredMark="true" :model="loginForm" :rules="loginRules" :label-col="labelCol" :wrapper-col="wrapperCol">
+          <a-form
+            ref="loginForm"
+            layout="horizontal"
+            :hideRequiredMark="true"
+            :model="loginForm"
+            :rules="loginRules"
+            :label-col="labelCol"
+            :wrapper-col="wrapperCol"
+          >
             <a-form-item label="用户名" name="userName">
-              <a-input v-model="loginForm.userName">
+              <a-input v-model="loginForm.userName" pressEnter="login">
                 <template #addonBefore>
                   <icon-font type="iconiconname"></icon-font>
                 </template>
               </a-input>
             </a-form-item>
             <a-form-item label="密码" name="password">
-              <a-input v-model="loginForm.password" type="password">
+              <a-input
+                v-model="loginForm.password"
+                type="password"
+                pressEnter="login"
+              >
                 <template #addonBefore>
                   <icon-font type="iconsuo"></icon-font>
                 </template>
               </a-input>
             </a-form-item>
             <a-form-item :wrapper-col="{ span: 6, offset: 8 }">
-              <a-button class="submit-btn" type="primary" @click="login">登录</a-button>
+              <a-button class="submit-btn" type="primary" @click="login"
+                >登录</a-button
+              >
             </a-form-item>
           </a-form>
         </a-tab-pane>
@@ -83,8 +97,12 @@ export default {
     }
   },
   created() {
+    console.log(this.$refs.loginWrap)
     document.onkeyup = event => {
-      if (event.keyCode === 13 || event.which === 13) {
+      if (
+        this.$refs.loginWrap &&
+        (event.keyCode === 13 || event.which === 13)
+      ) {
         this.login()
       }
     }
